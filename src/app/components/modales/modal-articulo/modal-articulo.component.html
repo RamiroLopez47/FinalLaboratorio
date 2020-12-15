@@ -1,0 +1,137 @@
+<div class="contenedor">
+    <div id="formulario">
+        <div id="encabezado">
+            <span>{{titulo}}</span>
+        </div>
+        <form [formGroup]="forma" novalidate="novalidate">
+            <!-- CAMPO CATEGORIA  -->
+            <mat-form-field appearance="standard">
+                <mat-label>Categoría</mat-label>
+                <mat-select formControlName="categoriaArticulo">
+                    <mat-option *ngFor="let categoria of categoriaArticulos" [value]="categoria">
+                        {{categoria.denominacion}}</mat-option>
+                </mat-select>
+                <mat-error>
+                    Selecione una categoria
+                </mat-error>
+            </mat-form-field>
+
+            <!-- CAMPO DENOMINACION -->
+            <mat-form-field appearance="standard">
+                <mat-icon matPrefix>
+                    text_fields</mat-icon>
+                <mat-label>Denominación</mat-label>
+                <input matInput formControlName="denominacion">
+                <mat-error>
+                    Ingrese una denominacion del articulo
+                </mat-error>
+            </mat-form-field>
+
+            <!-- CAMPO PRECIO DE COMPRA  -->
+            <mat-form-field appearance="standard">
+                <mat-icon matPrefix>
+                    attach_money</mat-icon>
+                <mat-label>Precio de Compra</mat-label>
+                <input matInput formControlName="precioCompra" type="number">
+                <mat-error>
+                    Error con el valor ingresado (Asegúrese de que el valor sea un numero)
+                </mat-error>
+            </mat-form-field>
+
+            <!-- CAMPO PRECIO DE Venta  -->
+            <mat-form-field appearance="standard">
+                <mat-icon matPrefix>
+                    attach_money</mat-icon>
+                <mat-label>Precio de Venta</mat-label>
+                <input matInput formControlName="precioVenta" type="number">
+                <mat-error>
+                    Error con el valor ingresado (Asegúrese de que el valor sea un numero positivo)
+                </mat-error>
+            </mat-form-field>
+
+            <!-- CAMPO UNIDAD DE MEDIDA  -->
+            <mat-form-field appearance="standard">
+                <mat-label>Unidad de Medida</mat-label>
+                <mat-select formControlName="medidaArticulo">
+                    <mat-option *ngFor="let unidad of unidadesDeMedida" [value]="unidad">
+                        {{unidad.denominacion}}</mat-option>
+                </mat-select>
+                <mat-error>
+                    Selecione una unidad de medida
+                </mat-error>
+            </mat-form-field>
+
+            <!-- CAMPO CANTIDAD ACTUAL  -->
+            <mat-form-field appearance="standard">
+                <mat-icon matPrefix>
+                    dashboard</mat-icon>
+                <mat-label>Cantidad Actual</mat-label>
+                <input matInput formControlName="stockActual" type="number">
+                <mat-error>
+                    Error con el valor ingresado (Asegúrese de que el valor sea un numero)
+                </mat-error>
+            </mat-form-field>
+
+
+
+            <!-- CAMPO CANTIDAD MINIMA  -->
+            <mat-form-field appearance="standard">
+                <mat-icon matPrefix>
+                    vertical_align_bottom</mat-icon>
+                <mat-label>Cantidad Mínima</mat-label>
+                <input matInput formControlName="stockMin" type="number">
+                <mat-error>
+                    Error con el valor ingresado (Asegúrese de que el valor sea un numero)
+                </mat-error>
+            </mat-form-field>
+
+            <!-- CAMPO CANTIDAD MAXIMA -->
+            <mat-form-field appearance="standard">
+                <mat-icon matPrefix>
+                    vertical_align_top</mat-icon>
+                <mat-label>Cantidad Máxima</mat-label>
+                <input matInput formControlName="stockMax" type="number">          
+                <mat-error *ngIf="this.forma.controls.stockMax?.invalid">
+                    Error con el valor ingresado (Asegúrese de que el valor sea un numero)
+                </mat-error>
+
+            </mat-form-field>
+
+            <!-- CAMPO TIPO DE INSUMO  -->
+            <div class="campo">
+                <mat-radio-group formControlName="esInsumo">
+                    <mat-radio-button [value]="false">Producto para reventa</mat-radio-button>
+                    <mat-radio-button [value]="true">Ingrediente</mat-radio-button>
+                </mat-radio-group>
+            </div>
+
+            <!-- CAMPO CANTIDAD IMAGEN -->
+            <mat-form-field appearance="standard">
+                <mat-icon matPrefix>
+                    link</mat-icon>
+                <mat-label>Imagen</mat-label>
+                <input matInput formControlName="imagen">
+                <mat-error>
+                    Ingrese Imagen
+                </mat-error>
+            </mat-form-field>
+
+            <!-- CAMPO CANTIDAD Descripcion -->
+            <mat-form-field appearance="standard">
+                <mat-icon matPrefix>
+                    text_fields</mat-icon>
+                <mat-label>Descripcion</mat-label>
+                <input matInput formControlName="descripcion">
+                <mat-error>
+                    Ingrese una describcion del articulo
+                </mat-error>
+            </mat-form-field>
+            <div class="comandos">
+                <button mat-raised-button class="my-eliminar" (click)="onNoClick()">CANCELAR</button>
+                <button *ngIf="this.forma.invalid" mat-raised-button class="my-disabledButton" disabled="true">AÑADIR</button>
+                <button *ngIf="this.forma.valid" mat-raised-button class="my-agregar" (click)="guardarCambios()">AÑADIR</button>
+            </div>
+        </form>
+        <br>
+    </div>
+</div>

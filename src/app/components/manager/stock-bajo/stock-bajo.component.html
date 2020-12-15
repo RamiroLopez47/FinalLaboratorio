@@ -1,0 +1,53 @@
+<div class="contenedor"> 
+    <div class="padreBuscador">
+        <div></div>
+        <div class="buscador">
+            <input placeholder="Filtrar elementos" (keyup)="filtrar($event.target.value)" #termino>
+            <button class="my-editar" (click)="filtrar(termino.value)">
+                <i class="fas fa-search">
+                </i>
+            </button>
+        </div>
+    </div>
+       <div class="tabla" class="mat-elevation-z8">
+        <mat-table [dataSource]="dataSource" matSort>
+
+            <!-- Denominacion Column -->
+            <ng-container matColumnDef="denominacion">
+                <mat-header-cell mat-sort-header *matHeaderCellDef> Denominación </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    {{element.denominacion | titlecase}} </mat-cell>
+            </ng-container>
+
+            <!-- Stock Minimo Column -->
+            <ng-container matColumnDef="stockMin">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Stock Mínimo </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    {{element.stockMin}}  {{element.medidaArticulo.denominacion}} </mat-cell>
+            </ng-container>
+
+            <!-- Stock Actual Column -->
+            <ng-container matColumnDef="stockActual">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Stock Actual</mat-header-cell>
+                <mat-cell *matCellDef="let element"> 
+                    {{element.stockActual}} {{element.medidaArticulo.denominacion}}
+                </mat-cell>
+            </ng-container>
+
+           <!-- Stock Maximo Column -->
+           <ng-container matColumnDef="stockMax">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Stock Máximo</mat-header-cell>
+            <mat-cell *matCellDef="let element">  
+                     {{element.stockMax}}  {{element.medidaArticulo.denominacion}}
+            </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+
+        </mat-table>
+        <mat-paginator [pageSizeOptions]="[5,10,20]" showFirstLastButtons aria-label="etiqueta">
+        </mat-paginator>
+    </div>
+
+</div>

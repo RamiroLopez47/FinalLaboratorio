@@ -1,0 +1,23 @@
+.buscador input {
+    border: none;
+    width: 15vw;
+    border-radius: 15px 0px 0px 15px;
+    border-color: black;
+    background-color: gainsboro;
+    text-align: center;
+  }
+  
+  .buscador button.my-editar  {
+    border: none;
+    border-radius: 0px 15px 15px 0px;
+    background-color: yellow;
+  }
+
+.preTabla{
+  display: flex;
+  justify-content: space-between;
+  padding-right: 5vw;
+  padding-left: 1vw;
+  padding-top: 0.5vw;
+  padding-bottom: 0.5vw;
+}

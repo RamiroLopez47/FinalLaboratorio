@@ -1,0 +1,34 @@
+footer {
+    background-color: rgb(223, 0, 0);
+    display: flex;
+    justify-content: space-around;
+    padding: 0;
+    margin: 0;
+    margin-top: 25px;
+}
+
+footer ul {
+    margin: 2px 10px 0px 10px;
+    text-align: center;
+    width: 25%;
+    list-style-type: none;
+    padding: 0;
+}
+
+footer ul li a,
+p {
+    color: white;
+}
+
+@media only screen and (max-width:768px) {
+    footer {
+        display: block;
+    }
+    footer ul {
+        width: 100%;
+    }
+}
+
+mat-select{
+    background-color: white;
+}

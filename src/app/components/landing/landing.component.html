@@ -1,0 +1,65 @@
+<div class="container my-cursor-food">
+    <div id="cabecera">
+        <div class="titulo my-shadow animated fadeInLeft">
+            <div class="texto animated fadeInRight">BUSCÁ, PEDÍ Y DISFRUTÁ</div>
+        </div>
+        <form class="buscador">
+            <input type="text" placeholder="Ej: Hamburguesa Doble" (keyup.enter)="buscar(termino.value)" #termino>
+            <button mat-button href="#" class="my-shadow" (click)="buscar(termino.value)">BUSCAR</button>
+        </form>
+        <div class="informacion">
+            <div class="horarios animated fadeIn">
+                <p>Horarios de Atención</p>
+                <ul>
+                    <li>Lunes a Domingos de 20:00 a 24:00</li>
+                    <li>Sábados y Domingos de 11:00 a 15:00</li>
+                </ul>
+            </div>
+            <div class="contactos animated fadeIn">
+                <p>CONTACTOS</p>
+                <ul>
+                    <li><i class="fas fa-phone"></i> (261) 123-4567</li>
+                    <li><i class="fab fa-whatsapp"></i> (261) 123-4567</li>
+                    <li><i class="fas fa-envelope"></i> elbuensabor@gmail.com</li>
+                </ul>
+            </div>
+        </div>
+        <a [routerLink]="['/menu']">
+            <div class="catalogo animated flipInX">
+                <img src="../../../assets/img/landing/4.png" alt="">
+                <p class="texto"><i class="fas fa-hamburger"></i> CATÁLOGO</p>
+            </div>
+        </a>
+    </div>
+    <div id="comodidad">
+        <div class="contenedor-imagen animated fadeIn">
+            <img src="../../../assets/img/landing/2.png" alt="">
+        </div>
+    </div>
+    <a [routerLink]="['/information/workwithus']">
+        <div id="equipo">
+            <div class="contenedor-imagen">
+                <img src="../../../assets/img/landing/3.webp" alt="">
+            </div>
+            <div class="experiencia">
+                30 AÑOS CON LOS MEJORES PROFESIONALES
+            </div>
+
+            <div class="trabajar animated fadeInRight">
+                ¿QUERÉS TRABAJAR CON NOSOTROS?
+            </div>
+
+        </div>
+    </a>
+    <div id="mapa">
+        <div class="titulo">
+            <P>TE ESPERAMOS EN <br> Av. Pedro Molina 3112 de Guaymallén</P>
+        </div>
+        <div class="conenedor-mapa">
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26802.960569599567!2d-68.8032538605191!3d-32.888382507710745!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x967e0f9665310c11%3A0xeb7511f97fc09a46!2sEl%20Buen%20Sabor!5e0!3m2!1ses-419!2sar!4v1589615517959!5m2!1ses-419!2sar"
+                width="100%" height="400" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false"
+                tabindex="0"></iframe>
+        </div>
+    </div>
+</div>

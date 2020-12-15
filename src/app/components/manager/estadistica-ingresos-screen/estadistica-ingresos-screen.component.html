@@ -1,0 +1,54 @@
+<div class="tarjetas estadistica mt-3" style="text-align: -webkit-center">
+    <div class="tarjeta" [class.mat-elevation-z4]="true">
+        <!-- ==========COMPONENTE DE LA IZQUIERDA ======= -->
+        <div class="item1">
+            <div class="encabezado">
+                <mat-list-item>Resumen</mat-list-item>
+            </div>
+
+            <div>
+                <img src="https://www.kindpng.com/picc/b/4-40962_person-with-money-png.png" alt="Ingresos"
+                    height="300px" width="300px" class="mt-5">
+            </div>
+
+            <div class="mt-5">
+                <p>
+                    Total de ingresos en el período:
+                    <span *ngIf="total >= 0 ;else perdida" style="color: green;">${{total | number:'1.2-2'}}</span>
+
+                    <ng-template #perdida>
+                        <span style="color: red;">${{total| number:'1.2-2'}}</span>
+                    </ng-template>
+                </p>
+            </div>
+        </div>
+
+
+        <!-- ==========BARRA DIVISORA ======= -->
+        <div class="vertical-line" style="height: 600px;">
+            <mat-divider [vertical]="true"></mat-divider>
+        </div>
+        <!-- ==========COMPONENTE DE LA DERECHA ======= -->        
+        <div class="item2">
+            <form [formGroup]="forma">            
+             
+              <mat-form-field appearance="standard">
+                <mat-label>Fecha Inicial</mat-label>
+                <input matInput type="date" formControlName="fechaInicial"/>
+              </mat-form-field>
+
+              <mat-form-field appearance="standard">
+                <mat-label>Fecha Final</mat-label>
+                <input matInput type="date" formControlName="fechaFinal"/>
+              </mat-form-field>
+
+                <div *ngIf="(this.forma.get('fechaInicial').value) < (this.forma.get('fechaFinal').value);else error">              
+                <button mat-raised-button class="my-editar" (click)="mostrarFechas()">Ver datos</button>
+                </div>
+                <ng-template #error>              
+                    <button mat-raised-button class="disabled" disabled="true" (click)="mostrarFechas()">Ver datos</button>
+                       </ng-template>
+            </form> 
+             </div>
+        </div>
+</div>

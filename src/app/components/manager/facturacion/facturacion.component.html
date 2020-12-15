@@ -1,0 +1,63 @@
+<div class="contenedor"> 
+
+    <div class="padreBuscador">
+        <div>
+            
+        </div>
+        <div class="buscador">
+            <input placeholder="Filtrar elementos" (keyup)="filtrar($event.target.value)" #termino>
+            <button class="my-editar" (click)="filtrar(termino.value)">
+                <i class="fas fa-search">
+                </i>
+            </button>
+        </div>
+    </div>
+
+
+<div class="tabla" class="mat-elevation-z8">
+    <mat-table [dataSource]="dataSource" matSort>
+
+        <!-- Nombre/Apellido Column -->
+        <ng-container matColumnDef="cliente">
+            <mat-header-cell mat-sort-header *matHeaderCellDef> Cliente </mat-header-cell>
+            <mat-cell class="pointer" *matCellDef="let element" >
+                {{element.pedido.cliente.nombre | titlecase}} {{element.pedido.cliente.apellido | titlecase}}</mat-cell>
+        </ng-container>
+
+        <!-- Fecha Column -->
+        <ng-container matColumnDef="fecha">
+            <mat-header-cell mat-sort-header *matHeaderCellDef> Fecha de Emisión</mat-header-cell>
+            <mat-cell class="pointer" *matCellDef="let element" >
+                {{element.fecha | date}} </mat-cell>
+        </ng-container>
+
+        <!-- Numero Column -->
+        <ng-container matColumnDef="numero">
+            <mat-header-cell mat-sort-header *matHeaderCellDef> N° Factura </mat-header-cell>
+            <mat-cell class="pointer" *matCellDef="let element" >
+                {{element.numero}} </mat-cell>
+        </ng-container>
+
+        <!-- Total Column -->
+        <ng-container matColumnDef="total">
+            <mat-header-cell mat-sort-header *matHeaderCellDef> Total </mat-header-cell>
+            <mat-cell class="pointer" *matCellDef="let element" >
+                ${{element.total | number:'1.2-2'}} </mat-cell>
+        </ng-container>
+
+        <!-- Descargar Column -->
+        <ng-container matColumnDef="descargar">
+            <mat-header-cell mat-sort-header *matHeaderCellDef> Descargar </mat-header-cell>
+            <mat-cell class="pointer" *matCellDef="let element" >
+                <button class="my-editar" mat-raised-button (click)="verFactura(element)"> <mat-icon>receipt</mat-icon>  Ver Factura</button>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5,10,20]" showFirstLastButtons aria-label="etiqueta">
+    </mat-paginator>
+</div>
+</div>
+

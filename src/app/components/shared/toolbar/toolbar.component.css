@@ -1,0 +1,61 @@
+.contenedor {
+  background-color: #df0000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+  min-height: 50px;
+  padding: 0px 2vw 0px 2vw;  
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo span {
+  font-family: "Bebas Neue", cursive;
+  color: white;
+  font-size: 2em;
+}
+
+.logo img {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+
+.buscador input {
+  border: none;
+  width: 23vw;
+  border-radius: 15px 0px 0px 15px;
+}
+
+.buscador button {
+  border: none;
+  border-radius: 0px 15px 15px 0px;
+  background-color: yellow;
+}
+
+@media only screen and (max-width: 768px) {
+  .buscador {
+    display: none;
+  }
+
+  .comandos button:last-child span{
+    display: none;
+    visibility: hidden;
+  }
+}
+
+.mat-raised-button {
+  background-color: yellow;
+}
+
+.comandos button:last-child {
+  margin-left: 1vw;
+}
+
+.my-editar{
+  transform: scale(.8);
+}

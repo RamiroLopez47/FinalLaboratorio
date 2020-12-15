@@ -1,0 +1,68 @@
+.contenedor {
+  text-align: center;
+  padding-top: 2vh;
+}
+
+.flexibilizador {
+  padding-top: 10px;
+}
+
+#foto {
+  width: 60%;
+  max-width: 200px;
+  margin: auto;
+  position: relative;
+}
+
+#foto img {
+  border-radius: 50%;
+  width: 100%;
+}
+
+#foto button {
+  background-color: yellow;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  color: black;
+}
+
+#formulario mat-form-field {
+  width: 90%;
+}
+
+#formulario .disabled {
+  cursor: not-allowed;
+  background-color: #f1f1f1;
+}
+
+#formulario .disabled input {
+  cursor: not-allowed;
+  background-color: #f1f1f1;
+}
+
+@media only screen and (min-width: 799px) {
+  .contenedor {
+    display: block;
+  }
+
+  .contenedor h2 {
+    width: 100%;
+    margin-top: 2vh;
+  }
+
+  .flexibilizador {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+  }
+
+  #foto {
+    transform: translateY(-30%);
+    align-self: flex-start;
+  }
+}
+
+::ng-deep .mat-snack-bar-container {
+  margin-top: 10vh;
+}

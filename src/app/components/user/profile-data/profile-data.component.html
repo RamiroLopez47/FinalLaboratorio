@@ -1,0 +1,60 @@
+<div class="contenedor animated fadeInDown">
+    <div class="flexibilizador">
+        <div id="foto">
+            <ng-container *ngIf="imagen; else sinImagen">
+                <img [src]="imagen" alt="">
+            </ng-container>
+            <ng-template #sinImagen>
+                <img src="../../../../assets/img/profile/defaultProfile.png" alt="">
+            </ng-template>
+            
+        </div>
+        <div id="formulario">
+            <form [formGroup]="forma" novalidate="novalidate">
+                <!-- CAMPO NOMBRE  -->
+                <mat-form-field appearance="standard" [ngClass]="{'disabled': soloLectura}">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput [readonly]="soloLectura" type="text" formControlName="nombre">
+                </mat-form-field>
+
+                <!-- CAMPO APELLIDO  -->
+                <mat-form-field appearance="standard" [ngClass]="{'disabled': soloLectura}">
+                    <mat-label>Apellido</mat-label>
+                    <input matInput [readonly]="soloLectura" type="text" formControlName="apellido">
+                </mat-form-field>
+
+                <!-- CAMPO TELEFONO  -->
+                <mat-form-field appearance="standard" [ngClass]="{'disabled': soloLectura}">
+                    <mat-label>Teléfono</mat-label>
+                    <input matInput [readonly]="soloLectura" type="text" formControlName="telefono">
+                </mat-form-field>
+
+                <!-- CAMPO EMAIL  -->
+                <mat-form-field appearance="standard" [ngClass]="{'disabled': true}">
+                    <mat-label>Correo</mat-label>
+                    <input matInput [readonly]="true" type="email" formControlName="email">
+                </mat-form-field>
+
+                <!-- COMANDOS  -->
+                <div style="height: 10px;"></div>
+                <div *ngIf="this.currentRol=='cliente'">
+                    <button mat-button (click)="activarEdicion()" *ngIf="soloLectura" class="my-editar">EDITAR
+                        <mat-icon>
+                            create</mat-icon>
+                    </button>
+                    <!-- ======================== -->
+                    <!-- boton de guardar  -->
+                    <!-- ======================== -->
+                    <button mat-button (click)="desactivarEdicion()" *ngIf="!soloLectura && this.forma.valid"
+                        class="my-agregar">
+                        GUARDAR<mat-icon>save</mat-icon>
+                    </button>
+                    <button *ngIf="!soloLectura && forma.invalid" mat-button class="my-disabledButton"
+                        matTooltip="Complete Todos Los Campos" disabled="true">
+                        GUARDAR<mat-icon>save</mat-icon>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,294 @@
+<div class="navegador">
+    <mat-slide-toggle [checked]="currentUser? currentUser.estaActivo : false"(change)="onCambioDeEstado($event)">DISPONIBLE</mat-slide-toggle>
+
+    <mat-tab-group mat-stretch-tabs [(selectedIndex)]="tabSeleccionado">
+        <mat-tab label="Mis Encargos">
+
+            <div class="tarjetas enEspera" *ngIf="pedidosEsparandoRepartidor.length > 0">
+
+                <!-- ITERACION SOBRE LOS PEDIDOS ESPERANDO AL REPARTIDOR  -->
+
+                <div class="tarjeta" *ngFor="let espera of pedidosEsparandoRepartidor;let i = index"
+                    [class.mat-elevation-z4]="true" (click)="verListado(espera.id)">
+
+
+                    <!-- CABECERA DE LA TARJETA  -->
+
+                    <div class="cabecera">
+                        <div class="numeroPedido">#{{espera.id}}</div>
+                        <div class="simbolo"><i class="fas fa-money-bill-wave"></i></div>
+                        <div class="precio">${{espera.precioFinal | number:'1.2-2'}}</div>
+                    </div>
+
+                    <!-- CONTENIDO DE LA TARJETA  -->
+
+                    <div class="contenido">
+
+                        <!-- DOMICILIO DEL PEDIDO  -->
+
+                        <div class="direccion">
+                            <p><b>{{espera.domicilio.localidad.denominacion}} -
+                                    {{espera.domicilio.localidad.departamento.denominacion}} </b></p>
+                            <p>{{espera.domicilio.calle}}
+                                <span *ngIf="espera.domicilio.manzana">{{espera.domicilio.manzana}} </span> -
+                                {{espera.domicilio.numero}} |
+                                <span *ngIf="espera.domicilio.barrio">Barrio: {{espera.domicilio.barrio}} </span>
+                            </p>
+                            <p>
+                                <span *ngIf="espera.domicilio.piso">Piso: {{espera.domicilio.piso}} </span>
+                                <span *ngIf="espera.domicilio.puerta">Puerta: {{espera.domicilio.puerta}} </span>
+                            </p>
+                        </div>
+
+                        <!-- LOGO DE MAPA  -->
+
+                        <div class="mapa">
+                            <img src="../../../../assets/img/delivery/mapa.png" alt="" (click)="openDialog(espera)"
+                                class="pointer">
+                        </div>
+
+                        <!-- ITEMS DEL PEDIDO -->
+
+                        <div class="items" *ngIf="espera.id == listadoMostrado">
+                            <table class="table table-striped">
+                                <tbody>
+
+                                    <!-- ITERACION SOBRE LOS ITEMS DEL PEDIDO  -->
+
+                                    <tr *ngFor="let item of espera.detallesPedido">
+                                        <td> {{item.plato.denominacion}}</td>
+                                        <td> {{item.cantidad}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- COMANDOS  -->
+
+                        <div class="comandos">
+                            <button mat-raised-button (click)="rechazar(i)" class="my-eliminar">RECHAZAR</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PEDIDOS EN CAMINO -->
+
+            <div class="tarjetas enCamino" *ngIf="pedidosEnCamino.length > 0">
+
+                <!-- ITERACION SOBRE LOS PEDIDOS ESPERANDO AL REPARTIDOR  -->
+
+                <div class="tarjeta" *ngFor="let enCamino of pedidosEnCamino;let i = index"
+                    [class.mat-elevation-z4]="true" (click)="verListado(enCamino.id)">
+
+
+                    <!-- CABECERA DE LA TARJETA  -->
+
+                    <div class="cabecera">
+                        <div class="numeroPedido">#{{enCamino.id}}</div>
+                        <div class="simbolo"><i class="fas fa-money-bill-wave"></i></div>
+                        <div class="precio">${{enCamino.precioFinal | number:'1.2-2'}}</div>
+                    </div>
+
+                    <!-- CONTENIDO DE LA TARJETA  -->
+
+                    <div class="contenido">
+
+                        <!-- DOMICILIO DEL PEDIDO  -->
+
+                        <div class="direccion">
+                            <p><b>{{enCamino.domicilio.localidad.denominacion}} -
+                                    {{enCamino.domicilio.localidad.departamento.denominacion}} </b></p>
+                            <p>{{enCamino.domicilio.calle}}
+                                <span *ngIf="enCamino.domicilio.manzana">{{enCamino.domicilio.manzana}} </span> -
+                                {{enCamino.domicilio.numero}} |
+                                <span *ngIf="enCamino.domicilio.barrio">Barrio: {{enCamino.domicilio.barrio}} </span>
+                            </p>
+                            <p>
+                                <span *ngIf="enCamino.domicilio.piso">Piso: {{enCamino.domicilio.piso}} </span>
+                                <span *ngIf="enCamino.domicilio.puerta">Puerta: {{enCamino.domicilio.puerta}} </span>
+                            </p>
+                        </div>
+
+                        <!-- LOGO DE MAPA  -->
+
+                        <div class="mapa">
+                            <img src="../../../../assets/img/delivery/mapa.png" alt="" (click)="openDialog(enCamino)"
+                                class="pointer">
+                        </div>
+
+                        <!-- ITEMS DEL PEDIDO -->
+
+                        <div class="items" *ngIf="enCamino.id == listadoMostrado">
+                            <table class="table table-striped">
+                                <tbody>
+
+                                    <!-- ITERACION SOBRE LOS ITEMS DEL PEDIDO  -->
+
+                                    <tr *ngFor="let item of enCamino.detallesPedido">
+                                        <td> {{item.plato.denominacion}}</td>
+                                        <td> {{item.cantidad}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- COMANDOS  -->
+
+                        <div class="comandos">
+                            <button mat-raised-button (click)="entregarPedido(i)" class="my-editar">ENTREGADO</button>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <!-- PEDIDOS EN ENTREGADO -->
+
+            <div class="tarjetas entregado" *ngIf="pedidosEntregados.length > 0">
+
+                <!-- ITERACION SOBRE LOS PEDIDOS ESPERANDO AL REPARTIDOR  -->
+
+                <div class="tarjeta" *ngFor="let entregado of pedidosEntregados;let i = index"
+                    [class.mat-elevation-z4]="true" (click)="verListado(entregado.id)">
+
+
+                    <!-- CABECERA DE LA TARJETA  -->
+
+                    <div class="cabecera">
+                        <div class="numeroPedido">#{{entregado.id}}</div>
+                        <div class="simbolo"><i class="fas fa-money-bill-wave"></i></div>
+                        <div class="precio">${{entregado.precioFinal | number:'1.2-2'}}</div>
+                    </div>
+
+                    <!-- CONTENIDO DE LA TARJETA  -->
+
+                    <div class="contenido">
+
+                        <!-- DOMICILIO DEL PEDIDO  -->
+
+                        <div class="direccion">
+                            <p><b>{{entregado.domicilio.localidad.denominacion}} -
+                                    {{entregado.domicilio.localidad.departamento.denominacion}} </b></p>
+                            <p>{{entregado.domicilio.calle}}
+                                <span *ngIf="entregado.domicilio.manzana">{{entregado.domicilio.manzana}} </span> -
+                                {{entregado.domicilio.numero}} |
+                                <span *ngIf="entregado.domicilio.barrio">Barrio: {{entregado.domicilio.barrio}} </span>
+                            </p>
+                            <p>
+                                <span *ngIf="entregado.domicilio.piso">Piso: {{entregado.domicilio.piso}} </span>
+                                <span *ngIf="entregado.domicilio.puerta">Puerta: {{entregado.domicilio.puerta}} </span>
+                            </p>
+                        </div>
+
+                        <!-- LOGO DE MAPA  -->
+
+                        <div class="mapa">
+                            <img src="../../../../assets/img/delivery/mapa.png" alt="" (click)="openDialog(entregado)"
+                                class="pointer">
+                        </div>
+
+                        <!-- ITEMS DEL PEDIDO -->
+
+                        <div class="items" *ngIf="entregado.id == listadoMostrado">
+                            <table class="table table-striped">
+                                <tbody>
+
+                                    <!-- ITERACION SOBRE LOS ITEMS DEL PEDIDO  -->
+
+                                    <tr *ngFor="let item of entregado.detallesPedido">
+                                        <td> {{item.plato.denominacion}}</td>
+                                        <td> {{item.cantidad}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>                        
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <div class="tarjeta tomarOtro animated fadeInDown pointer
+            " (click)="verTodos()" *ngIf="currentUser? currentUser.estaActivo : false">
+                <p>TOMAR ENVÍO</p>
+            </div>
+
+
+        </mat-tab>
+
+        <!-- ==========PEDIDOS EN ESPERA ======= -->
+
+        <mat-tab label="En Espera" [disabled]="currentUser? !currentUser.estaActivo : true">
+            <div class="tarjetas enEspera" *ngIf="pedidosEsparandoAsignacion.length > 0">
+
+                <!-- ITERACION SOBRE LOS PEDIDOS ESPERANDO A SER ASIGNADOS  -->
+
+                <div class="tarjeta" *ngFor="let espera of pedidosEsparandoAsignacion;let i = index"
+                    [class.mat-elevation-z4]="true" (click)="verListado(espera.id)">
+
+
+                    <!-- CABECERA DE LA TARJETA  -->
+
+                    <div class="cabecera">
+                        <div class="numeroPedido">#{{espera.id}}</div>
+                        <div class="simbolo"><i class="fas fa-money-bill-wave"></i></div>
+                        <div class="precio">${{espera.precioFinal | number:'1.2-2'}}</div>
+                    </div>
+
+                    <!-- CONTENIDO DE LA TARJETA  -->
+
+                    <div class="contenido">
+
+                        <!-- DOMICILIO DEL PEDIDO  -->
+
+                        <div class="direccion">
+                            <p><b>{{espera.domicilio.localidad.denominacion}} -
+                                    {{espera.domicilio.localidad.departamento.denominacion}} </b></p>
+                            <p>{{espera.domicilio.calle}}
+                                <span *ngIf="espera.domicilio.manzana">{{espera.domicilio.manzana}} </span> -
+                                {{espera.domicilio.numero}} |
+                                <span *ngIf="espera.domicilio.barrio">Barrio: {{espera.domicilio.barrio}} </span>
+                            </p>
+                            <p>
+                                <span *ngIf="espera.domicilio.piso">Piso: {{espera.domicilio.piso}} </span>
+                                <span *ngIf="espera.domicilio.puerta">Puerta: {{espera.domicilio.puerta}} </span>
+                            </p>
+                        </div>
+
+                        <!-- LOGO DE MAPA  -->
+
+                        <div class="mapa">
+                            <img src="../../../../assets/img/delivery/mapa.png" alt="" (click)="openDialog(espera)"
+                                class="pointer">
+                        </div>
+
+                        <!-- ITEMS DEL PEDIDO -->
+
+                        <div class="items" *ngIf="espera.id == listadoMostrado">
+                            <table class="table table-striped">
+                                <tbody>
+
+                                    <!-- ITERACION SOBRE LOS ITEMS DEL PEDIDO  -->
+
+                                    <tr *ngFor="let item of espera.detallesPedido">
+                                        <td> {{item.plato.denominacion}}</td>
+                                        <td> X{{item.cantidad}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- COMANDOS  -->
+
+                        <div class="comandos">
+                            <button mat-raised-button (click)="tomar(i)">TOMAR</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+</div>

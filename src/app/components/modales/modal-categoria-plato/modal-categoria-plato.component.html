@@ -1,0 +1,55 @@
+<div class="contenedor">
+
+    <div id="formulario">
+        <div id="encabezado">
+            <span>{{titulo}}</span>
+        </div>
+        <form [formGroup]="forma" novalidate="novalidate">
+
+            <!-- CAMPO CATEGORIA  -->
+            <mat-form-field appearance="standard">
+                <mat-label>Pertenece a la categoria</mat-label>
+                <mat-select formControlName="categoriaPlato">
+                    <mat-option value="0"><b>Sin Categoria Padre</b></mat-option>
+                    <mat-option *ngFor="let categoria of categoriaPlatos" [value]="categoria">
+                        {{categoria.denominacion}}</mat-option>
+                </mat-select>
+                <mat-error>
+                    Selecione una categoria
+                </mat-error>
+            </mat-form-field>
+
+            <!-- CAMPO DENOMINACION -->
+            <mat-form-field appearance="standard">
+                <mat-icon matPrefix>
+                    text_fields</mat-icon>
+                <mat-label>Denominación</mat-label>
+                <input matInput formControlName="denominacion">
+                <mat-error>
+                    Ingrese una denominacion 
+                </mat-error>
+            </mat-form-field>
+
+            <!-- CAMPO descripcion -->
+            <mat-form-field appearance="standard">
+                <mat-icon matPrefix>
+                    text_fields</mat-icon>
+                <mat-label>Descripcion</mat-label>
+                <input matInput formControlName="descripcion">
+                <mat-error>
+                    Ingrese una descripcion
+                </mat-error>
+            </mat-form-field>
+
+            <div class="comandos">
+                <button mat-raised-button class="my-eliminar" (click)="onNoClick()">CANCELAR</button>
+                <button *ngIf="this.forma.invalid" mat-raised-button class="my-disabledButton"
+                    disabled="true">AÑADIR</button>
+                <button *ngIf="this.forma.valid" mat-raised-button class="my-agregar"
+                    (click)="guardarCambios()">AÑADIR</button>
+            </div>
+        </form>
+
+        <br>
+    </div>
+</div>

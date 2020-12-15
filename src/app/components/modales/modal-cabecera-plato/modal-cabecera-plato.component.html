@@ -1,0 +1,169 @@
+<div class="contenedor">
+    <div id="formulario">
+        <div id="encabezado">
+            <span>{{titulo}} | {{this.forma.value.denominacion}}</span>
+        </div>
+        <form [formGroup]="forma" novalidate="novalidate">
+            <mat-horizontal-stepper>
+                <mat-step label="Maestro">
+                    <!-- CAMPO CATEGORIA  -->
+                    <mat-form-field appearance="standard">
+                        <mat-label>Categoría</mat-label>
+                        <mat-select formControlName="categoriaPlato">
+                            <mat-option *ngFor="let categoria of categoriPlatos" [value]="categoria">
+                                {{categoria.denominacion}}</mat-option>
+                        </mat-select>
+                        <mat-error>
+                            Selecione una categoria
+                        </mat-error>
+                    </mat-form-field>
+
+                    <!-- CAMPO DENOMINACION -->
+                    <mat-form-field appearance="standard">
+                        <mat-icon matPrefix>
+                            text_fields</mat-icon>
+                        <mat-label>Denominación</mat-label>
+                        <input matInput formControlName="denominacion">
+                        <mat-error>
+                            Ingrese una denominacion del plato
+                        </mat-error>
+                    </mat-form-field>
+
+                    <!-- CAMPO precioVenta -->
+                    <mat-form-field appearance="standard">
+                        <mat-icon matPrefix>
+                            attach_money</mat-icon>
+                        <mat-label>Precio De Venta</mat-label>
+                        <input matInput formControlName="precioVenta" type="number">
+                        <mat-error>
+                            Error con el valor ingresado (Asegúrese de que el valor sea un numero)
+                        </mat-error>
+                    </mat-form-field>
+
+                    <!-- CAMPO tiempoPreparacion -->
+                    <mat-form-field appearance="standard">
+                        <mat-icon matPrefix>
+                            watch_later</mat-icon>
+                        <mat-label>Tiempo de Preparacion</mat-label>
+                        <input matInput formControlName="tiempoPreparacion" type="number">
+                        <mat-error>
+                            Ingrese un tiempo de preparacion (Asegúrese de que el valor sea un numero o positivo)
+                        </mat-error>
+                        <span matSuffix>minutos</span>
+                    </mat-form-field>
+
+                    <!-- CAMPO imagen -->
+                    <mat-form-field appearance="standard">
+                        <mat-icon matPrefix>
+                            link</mat-icon>
+                        <mat-label>Imagen</mat-label>
+                        <input matInput formControlName="imagen">
+                        <mat-error>
+                            Ingrese un imagen
+                        </mat-error>
+                    </mat-form-field>
+
+
+                    <br>
+
+                    <!-- CAMPO receta -->
+                    <div class="recetario">
+                        <mat-form-field appearance="standard" style="width: 100%;">
+                            <mat-icon matPrefix>
+                                list_alt</mat-icon>
+                            <mat-label>Receta</mat-label>
+                            <textarea matInput formControlName="receta"></textarea>
+                        </mat-form-field>
+                    </div>
+                </mat-step>
+                <!-- ====================================================== -->
+                <!-- SEGUNDO PASO  -->
+                <!-- ====================================================== -->
+
+
+                <mat-step label="Detalle">
+
+                    <form [formGroup]="forma2" id="formularioDetalle">
+                        <!-- CAMPO Articulo  -->
+                        <mat-form-field appearance="standard">
+                            <mat-label>Articulo</mat-label>
+                            <mat-select formControlName="articulo">
+                                <mat-option *ngFor="let articulo of articulos" [value]="articulo">
+                                    {{articulo.denominacion}}</mat-option>
+                            </mat-select>
+                            <mat-error>
+                                Selecione un articulo
+                            </mat-error>
+                        </mat-form-field>
+
+                        <!-- CAMPO Cantidad -->
+                        <mat-form-field appearance="standard" style="margin-bottom: 18px;">
+                            <mat-icon matPrefix>
+                                colorize</mat-icon>
+                            <mat-label>Cantidad</mat-label>
+                            <input matInput formControlName="cantidad" type="number">
+                            <span matSuffix *ngIf="forma2.value.articulo">{{forma2.value.articulo.medidaArticulo.denominacion}}</span>
+                            <mat-error>
+                                Ingrese una cantidad (Asegúrese de que el valor sea un numero o positivo)
+                            </mat-error>
+                        </mat-form-field>
+
+                        <!-- CAMPO MEDIDA PLATO -->
+                        <!-- <span *ngIf="forma2.value.articulo">{{forma2.value.articulo.medidaArticulo.denominacion}}</span>
+                        <span *ngIf="!forma2.value.articulo">Unidad De Medida</span> -->
+
+
+                        <!-- BOTON AGREGAR DETALLE PLATO -->
+                        <button *ngIf="this.forma2.invalid" mat-raised-button class="my-disabledButton" disabled="true">
+                            <mat-icon>add</mat-icon>
+                        </button>
+                        <button *ngIf="this.forma2.valid" mat-raised-button class="my-agregar"
+                            (click)="agregarDetallePlato()">
+                            <mat-icon>add</mat-icon>
+                        </button>
+                    </form>
+
+
+                    <table id="tablaDetallePedido">
+                        <thead>
+                            <tr>
+                                <th>ARTICULO</th>
+                                <th>CANTIDAD</th>
+                                <th>UNIDAD DE MEDIDA</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <div class="tabla-scroll">
+                            <div class="fila" *ngFor="let detallePlato of defaultObject.detallePlato; index as indice">
+                                <div class="columna">{{detallePlato.articulo.denominacion}}</div>
+                                <div class="columna">{{detallePlato.cantidad}}</div>
+                                <div class="columna">{{detallePlato.articulo.medidaArticulo.denominacion}}</div>
+                                <div class="columna">
+                                    <button mat-button (click)="eliminarDetallePlato(indice)">
+                                        <mat-icon>clear</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </table>
+
+                    <!-- ============================================== -->
+                    <!-- COMANDOS GLOBALES -->
+                    <!-- ============================================== -->
+                    <div class="comandos">
+                        <button mat-raised-button class="my-eliminar" (click)="onNoClick()">CANCELAR</button>
+                        <button *ngIf="!(this.forma.valid && defaultObject.detallePlato.length > 0)" mat-raised-button
+                            class="my-disabledButton" disabled="true">AÑADIR</button>
+                        <button *ngIf="this.forma.valid && defaultObject.detallePlato.length  > 0" mat-raised-button
+                            class="my-agregar" (click)="guardarCambios()">AÑADIR</button>
+                    </div>
+
+                </mat-step>
+            </mat-horizontal-stepper>
+
+        </form>
+
+        <br>
+    </div>
+</div>

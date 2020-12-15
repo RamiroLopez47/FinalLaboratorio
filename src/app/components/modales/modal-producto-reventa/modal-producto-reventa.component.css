@@ -1,0 +1,69 @@
+.contenedor {
+  text-align: center;
+  min-width: 50vw;
+}
+
+.cabecera {
+  padding-left: 2em;
+  text-align: left;
+  background-color: #df0000;
+  line-height: 3em;
+  color: white;
+  font-weight: bold;
+}
+
+.formulario {
+  width: 100%;
+  padding: 7px;
+  box-sizing: border-box;
+  margin: auto;
+}
+
+mat-form-field,
+.campo {
+  box-sizing: border-box;
+  display: inline-block;
+  margin: 0.5%;
+  width: 32.33%;
+}
+
+/* ================================ */
+.segundo {
+  display: flex;
+  width: 100%;
+}
+
+.segundo .izquierda {
+  box-sizing: border-box;
+  width: 40%;
+  object-fit: contain;
+  padding: 10px;
+}
+
+.segundo .izquierda img {
+  width: 100%;
+  max-height: 100%;
+  border-radius: 15px;
+}
+
+.segundo .derecha {
+  padding: 10px;
+  box-sizing: border-box;
+  width: 60%;
+}
+
+table {
+  width: 100%;
+  line-height: 1.5em;
+}
+
+.segundo th,
+td {
+  border: 1px solid gray;
+}
+
+.comandos{
+  display: flex;
+  justify-content: space-around;
+  padding: 0 5vw;
+}

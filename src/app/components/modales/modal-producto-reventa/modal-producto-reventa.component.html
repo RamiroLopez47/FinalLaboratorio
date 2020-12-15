@@ -1,0 +1,94 @@
+<div class="contenedor">
+    <div class="cabecera">
+        {{titulo | uppercase}}
+    </div>
+    <div class="formulario">
+        <form [formGroup]="forma" novalidate="novalidate">
+
+            <mat-horizontal-stepper linear>
+                <mat-step label="Datos" [stepControl]="forma">
+                    <mat-form-field appearance="standard">
+                        <mat-label>Categoría</mat-label>
+                        <mat-select formControlName="categoria">
+                            <mat-option *ngFor="let categoria of categoriaPlatos" [value]="categoria">
+                                {{categoria.denominacion}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field appearance="standard">
+                        <mat-label>Articulo</mat-label>
+                        <mat-select formControlName="articulo" (selectionChange)="seleccionarArticulo($event.value)">
+                            <mat-option *ngFor="let articulo of articulos" [value]="articulo">
+                                {{articulo.denominacion}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <!-- CAMPO DENOMINACION -->
+                    <mat-form-field appearance="standard">
+                        <mat-icon matPrefix>
+                            text_fields
+                        </mat-icon>
+                        <mat-label>Denominación</mat-label>
+                        <input matInput formControlName="denominacion">
+                    </mat-form-field>
+
+                    <!-- CAMPO precioVenta -->
+                    <mat-form-field appearance="standard">
+                        <mat-icon matPrefix>
+                            attach_money</mat-icon>
+                        <mat-label>Precio De Venta Sugerido</mat-label>
+                        <input matInput formControlName="precioVenta" type="number">
+                    </mat-form-field>
+                    <div>
+                        <button mat-raised-button class="my-editar" matStepperNext
+                            (click)="refrescarPlato()">Listo!</button>
+                    </div>
+                </mat-step>
+                <mat-step label="Previsualizar">
+
+                    <div class="segundo" *ngIf="platoListo">
+                        <div class="izquierda">
+                            <img [src]="platoListo.imagen" alt="cargando...">
+                        </div>
+                        <div class="derecha">
+                            <table>
+                                <tr>
+                                    <th>Denominacion</th>
+                                    <td colspan="3">{{platoListo.denominacion}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Basado en Artículo</th>
+                                    <td colspan="3">{{platoListo.detallePlato[0].articulo.denominacion}}</td>
+                                </tr>
+                                <tr>
+                                    <th colspan="2">Categoría</th>
+                                    <td colspan="2">{{platoListo.categoriaPlato.denominacion}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Costo de Compra</th>
+                                    <td>$ {{platoListo.detallePlato[0].articulo.precioCompra | number:'1.2-2'}}</td>
+                                    <th>Precio de Venta</th>
+                                    <td>$ {{platoListo.precioVenta | number:'1.2-2'}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Ganancia</th>
+                                    <td colspan="3">$
+                                        {{(platoListo.precioVenta - platoListo.detallePlato[0].articulo.precioCompra) | number:'1.2-2'}}
+                                    </td>
+                                </tr>
+                            </table>
+                            <br>
+                            <div class="comandos">
+                                <button mat-raised-button class="my-eliminar" (click)="cancelar()">Cancelar</button>
+                                <button mat-raised-button class="my-agregar" (click)="agregarReventa()">Agregar</button>
+                            </div>
+                        </div>
+                    </div>
+                </mat-step>
+            </mat-horizontal-stepper>
+
+        </form>
+    </div>
+</div>

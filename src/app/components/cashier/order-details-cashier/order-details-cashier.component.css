@@ -1,0 +1,46 @@
+.cabecera {
+  background-color: rgb(223, 0, 0);
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 15px;
+  color: white;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+table {
+  min-width: 60vw;
+  border: 1px solid blue;
+  margin: 0px;
+}
+
+th,
+td {
+  padding: 3px;
+  border: 1px solid gray;
+}
+/* DETALLES DEL PEDIDO  */
+
+.detalles .encabezado {
+  background-color: black;
+  color: white;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.detalles .columna {
+  box-sizing: border-box;
+  width: 33.3333%;
+  border: 1px solid gray;
+}
+
+.detalles .encabezado,
+.tupla {
+  text-align: center;
+  display: flex;
+}
+
+.scroll {
+  max-height: 90px;
+  overflow-y: scroll;
+}

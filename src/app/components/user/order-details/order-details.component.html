@@ -1,0 +1,67 @@
+<div class="cabecera">
+    <div class="estado">{{pedido.estado.denominacion | uppercase}}</div>
+    <div class="numero">#{{pedido.id}}</div>
+</div>
+<div class="datos">
+    <table>
+        <tr>
+            <th colspan="2">Total</th>
+            <td colspan="2">${{pedido.precioFinal | number : '1.2-2'}}</td>
+        </tr>
+        <tr>
+            <th>Fecha</th>
+            <td>{{pedido.fecha | date:'d/M/yy, h:mm a' }}</td>
+            <th>Tipo de entrega</th>
+            <td>{{pedido.conDelivery? "Con Entrega a Domicilio" : "Retiro en Local"}}</td>
+        </tr>
+        <tr>
+            <th>Domicilio De Entrega</th>
+            <td colspan="3">{{pedido.domicilio? formatearDomicilio(pedido.domicilio): "No Aplica"}}</td>
+        </tr>
+        <tr>
+            <th>Repartidor</th>
+            <td>{{pedido.conDelivery? (pedido.delivery?.apellido + ' ' + pedido.delivery?.nombre) : "No Aplica"}}</td>
+            <th>Fecha Estimada De Entrega</th>
+            <td>{{pedido.horaEstimadaFin | date:'d/M/yy, h:mm a' }}</td>
+        </tr>
+        <tr *ngIf="pedido.estado.denominacion == 'COBRADO'">
+            <th>Forma de Pago</th>
+            <td>{{pedido.formaPago.hasOwnProperty('numeroDeTarjeta')? "TARJETA" : "EFECTIVO"}}</td>
+            <th>Tipo</th>
+            <td>{{validarTipoTarjeta(pedido)}}</td>
+        </tr>
+    </table>
+    <div class="detalles">
+        <div class="encabezado" style="margin-right: 18px;">
+            <div class="columna">Item</div>
+            <div class="columna">Cantidad</div>
+            <div class="columna">SubTotal</div>
+        </div>
+        <div class="scroll">
+            <div class="tupla" *ngFor="let item of pedido.detallesPedido">
+                <div class="columna">{{item.plato.denominacion | titlecase}}</div>
+                <div class="columna">x{{item.cantidad}}</div>
+                <div class="columna">${{item.subTotal | number: '1.2-2'}}</div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<div class="comandos">
+    <button mat-raised-button class="my-eliminar" (click)="salir()">Salir</button>
+
+    <button mat-raised-button class="my-editar" *ngIf="pedido.estado.denominacion == 'COBRADO' && !enviandoFactura"
+        (click)="enviarFactura()">
+        <mat-icon>email</mat-icon> Enviar Factura A Mi Correo
+    </button>
+    <button mat-raised-button class="my-disabledButton"
+        *ngIf="pedido.estado.denominacion == 'COBRADO' && enviandoFactura" disabled="true">
+        <i class="fas fa-spinner fa-spin "></i>Enviar Factura A Mi Correo
+    </button>
+
+    <button mat-raised-button class=" my-editar" *ngIf="pedido.estado.denominacion == 'COBRADO'"
+        (click)="descargarFactura()">
+        <mat-icon>get_app</mat-icon> Descargar Factura
+    </button>
+</div>
+<br>

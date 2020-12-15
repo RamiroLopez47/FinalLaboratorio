@@ -1,0 +1,349 @@
+.cocinaAll {
+  margin-bottom: 3vh;
+}
+
+.contenedor {
+  display: inline-flex;
+  width: 100%;
+  text-align: center;
+}
+
+#izquierda {
+  width: 30%;
+  text-align: center;
+}
+
+#derecha {
+  width: 70%;
+}
+
+/* ================================================== */
+/* ZONA SIDENAV  */
+/* ================================================== */
+
+mat-sidenav-container {
+  min-height: 80vh;
+}
+
+mat-sidenav {
+  padding: 10px;
+  min-width: 30vw;
+}
+
+mat-sidenav-content {
+  background-color: transparent;
+}
+
+.contenedorDetalles {
+  text-align: center;
+  width: 97%;
+  margin-left: 6px;
+}
+.mycerrar {
+  margin-top: 10px;
+  background-color: rgb(255, 64, 129);
+}
+
+/* ================================================== */
+/* ZONA IZQUIERDA  */
+/* ================================================== */
+
+#izquierda .titulo h2 {
+  font-family: "Bebas Neue", cursive;
+  font-size: 2.5em;
+  color: #00bf78;
+}
+.botonPersonal {
+  background-color: rgb(252, 235, 0);
+  margin-top: 2%;
+  margin-right: 3%;
+}
+
+.ContieneEncabezado {
+  display: flex;
+  justify-content: center;
+  margin-top: 2%;
+}
+.contenedorBoton {
+  margin-right: 3%;
+}
+
+#izquierda .tarjetas {
+  background-color: #e1fff4;
+  overflow: auto;
+  border-radius: 15px;
+  height: 80vh;
+  width: 90%;
+  margin: 0% auto;
+}
+
+#izquierda .tarjetas::-webkit-scrollbar {
+  width: 7px;
+  background-color: white;
+}
+
+#izquierda .tarjetas::-webkit-scrollbar-thumb {
+  background-color: #00bf78;
+  border-radius: 5px;
+}
+
+#izquierda .tarjetas .tarjeta {
+  width: 90%;
+  min-height: 150px;
+  margin: 2vh auto;
+  background-color: white;
+  border-radius: 15px;
+}
+
+#izquierda .tarjetas .tarjeta .encabezado {
+  background-color: #00bf78;
+  color: white;
+  font-size: 1.5em;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 10px;
+  border-radius: 15px 15px 0px 0px;
+}
+
+#izquierda .tarjetas .retrasado {
+  background-color: red !important;
+}
+
+/* ============================================================ */
+/* TABLA DE LOS ITEMS DENTRO DE CADA TARJETA DE PEDIDOS EN ESPERA  */
+/* ============================================================ */
+
+.cuerpo {
+  overflow-y: scroll;
+  max-height: 150px;
+}
+
+.cuerpo::-webkit-scrollbar {
+  width: 7px;
+  background-color: white;
+}
+
+.cuerpo::-webkit-scrollbar-thumb {
+  background-color: #888888;
+  border-radius: 5px;
+}
+
+.tablaPedidos .fila {
+  display: flex;
+  line-height: 1.7em;
+}
+
+.tablaPedidos .fila:nth-child(obb) {
+  background-color: gray;
+}
+
+.tablaPedidos .fila:nth-child(even) {
+  background-color: rgb(231, 231, 231);
+}
+
+.tablaPedidos .fila .nombre {
+  width: 70%;
+}
+
+.tablaPedidos .fila .cantidad {
+  width: 30%;
+  font-weight: bold;
+}
+
+/* =========================================================== */
+/* COMANDO TOMAR PEDIDO DEL LADO IZQUIERDO  */
+/* =========================================================== */
+
+#izquierda .comando button {
+  margin: 10px 0px;
+}
+/* ============================================================= */
+/* DERECHA  DEFINICIONES GENERALES */
+/* ============================================================= */
+
+#derecha .tomados,
+.detalleReceta {
+  height: 49%;
+  border-radius: 15px;
+}
+
+#derecha .detalleReceta {
+  margin-top: 1%;
+}
+
+/* DEFINICIONES GENERALES DE PEDIDOS TOMADOS  */
+#derecha .tomados {
+  background-color: #dffcff;
+}
+
+#derecha .tomados .tarjetas {
+  display: flex;
+  align-items: center;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  height: 100%;
+  width: 98%;
+  margin: auto 1%;
+}
+
+#derecha .tomados .tarjetas::-webkit-scrollbar {
+  background-color: white;
+  height: 7px;
+}
+
+#derecha .tomados .tarjetas:hover::-webkit-scrollbar {
+  height: 13px;
+}
+
+#derecha .tomados .tarjetas::-webkit-scrollbar-thumb {
+  background-color: #00abbf;
+  border-radius: 5px;
+}
+
+#derecha .tomados .tarjetas .tarjeta {
+  box-sizing: border-box;
+  display: inline-block;
+  width: 20vw;
+  margin: 1% 0.5%;
+  height: 90%;
+  border-radius: 15px;
+  background-color: white;
+}
+
+.tomados .tarjeta .encabezado {
+  display: flex;
+  color: white;
+  justify-content: space-between;
+  background-color: #00abbf;
+  font-size: 1.5em;
+  padding: 5px 10px;
+  border-radius: 15px 15px 0px 0px;
+}
+
+.retrasado {
+  background-color: red !important;
+}
+
+#derecha .tarjeta .cuerpo {
+  max-height: 130px;
+}
+
+#derecha .tomados input {
+  width: 20px;
+  height: 20px;
+  background-color: green;
+}
+
+#derecha .tomados .comandos {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 2vh;
+}
+
+/* DEFINICIONES GENERALES DE DETALLE RECETA  */
+
+#derecha .detalleReceta {
+  background-color: #fcddf9;
+  padding-bottom: 1%;
+}
+
+#derecha .detalleReceta .encabezado {
+  width: 100%;
+  border-radius: 15px 15px 0px 0px;
+  background-color: #bf00ac;
+  text-align: left;
+  color: white;
+  padding-left: 10px;
+  font-size: 1.5em;
+  line-height: 1.5em;
+  min-height: 1.5em;
+}
+/* ===================== */
+/* DETALLE PLATO  */
+/* ===================== */
+.cuerpo-detalles {
+  height: 39vh;
+  display: flex;
+}
+
+.cuerpo-detalles > div {
+  width: 33.333%;
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+.cuerpo-detalles .cont-imagen {
+  width: 33.33%;
+  box-sizing: border-box;
+  height: 100%;
+}
+
+.cuerpo-detalles .cont-imagen img {
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+}
+
+/* ================== */
+/* Tabla de Ingredientes  */
+/* ================== */
+
+.nuevaTabla .cabecera,
+.fila {
+  display: flex;
+}
+
+.nuevaTabla .cabecera {
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  height: 2em;
+  align-items: center;
+}
+
+.nuevaTabla .ingrediente,
+.cantidad {
+  width: 50%;
+  box-sizing: border-box;
+}
+
+.nuevaTabla .cuerpo-tabla .fila .ingrediente,
+.cantidad {
+  line-height: 2em;
+}
+
+.nuevaTabla .cuerpo-tabla .fila:nth-child(odd) {
+  background-color: rgb(255, 255, 255);
+}
+
+.nuevaTabla .cuerpo-tabla .fila:nth-child(even) {
+  background-color: rgb(228, 228, 228);
+}
+/* ======================= */
+/* RECETA  */
+/* ======================= */
+
+.preparacion textarea {
+  width: 100%;
+  height: 100%;
+  resize: none;
+  border: 0px;
+  background-color: white !important;
+  color: black;
+}
+
+.nuevaTabla .cuerpo-tabla{
+  max-height: 30vh;
+  overflow: auto;
+}
+
+.nuevaTabla .cuerpo-tabla::-webkit-scrollbar {
+  width: 7px;
+  background-color: white;
+}
+
+.nuevaTabla .cuerpo-tabla::-webkit-scrollbar-thumb {
+  background-color: #00bf78;
+  border-radius: 5px;
+}

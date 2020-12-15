@@ -1,0 +1,122 @@
+.comandos {
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 2vh;
+  display: flex;
+  justify-content: space-between;
+}
+.comandos button {
+  float: right;
+}
+
+.tabla {
+  margin-top: 2vh;
+}
+.contenedorDetalles{
+  text-align: center;
+  background-color: rgb(0, 0, 0);
+  padding: 10px;
+}
+
+.contenedorDetalles div{
+  font-weight: bold;
+  color: white;
+}
+.contenedorDetalles img{
+  max-width: 30vw;
+  max-height: 150px;
+  object-fit: contain;
+  border: 3px solid white;
+  margin: 1vh 0px
+}
+mat-sidenav-container {
+  min-height: 70vh;
+}
+
+mat-sidenav{
+  padding: 10px;
+  min-width: 20vw;
+}
+
+mat-sidenav-content{
+  background-color: transparent;
+}
+
+/* ===================================================== */
+
+mat-paginator {
+  display: flex;
+  justify-content: center;
+}
+
+mat-cell,
+mat-header-cell {
+  display: flex;
+  justify-content: center;
+}
+
+mat-progress-bar {
+  width: 100%;
+  height: 25px;
+}
+
+.cantidadActual {
+  display: block;
+  text-align: center;
+}
+
+.bien ::ng-deep .mat-progress-bar-fill::after {
+  background-color: rgb(0, 184, 9);
+}
+
+.bien ::ng-deep .mat-progress-bar-buffer {
+  background: rgb(203, 255, 203);
+}
+
+.medio ::ng-deep .mat-progress-bar-fill::after {
+  background-color: rgb(255, 208, 0);
+}
+
+.medio ::ng-deep .mat-progress-bar-buffer {
+  background: rgb(255, 250, 181);
+}
+
+.mal ::ng-deep .mat-progress-bar-fill::after {
+  background-color: rgb(189, 0, 0);
+}
+
+.mal ::ng-deep .mat-progress-bar-buffer {
+  background: rgb(255, 187, 187);
+}
+
+::ng-deep .mat-progress-bar {
+  border-radius: 2px;
+}
+/* ===================================================== 
+                  Estilos del buscador
+ ===================================================== */
+
+
+.buscador input {
+  border: none;
+  width: 15vw;
+  border-radius: 15px 0px 0px 15px;
+  border-color: black;
+  background-color: gainsboro;
+  text-align: center;
+}
+
+.buscador button.my-editar  {
+  border: none;
+  border-radius: 0px 15px 15px 0px;
+  background-color: yellow;
+}
+
+.preTabla{
+display: flex;
+justify-content: space-between;
+padding-right: 5vw;
+padding-left: 1vw;
+padding-top: 0.5vw;
+padding-bottom: 0.5vw;
+}

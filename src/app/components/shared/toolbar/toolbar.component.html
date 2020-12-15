@@ -1,0 +1,72 @@
+<div class="contenedor">
+    <div class="logo pointer" [routerLink]="[ '/home']">
+        <img src="../../../../assets/img/logo/logo.jpg" alt="">
+        <span>EL BUEN SABOR</span>
+    </div>
+    <div class="buscador">
+        <form *ngIf="validarRuta()">
+            <input placeholder="Ej. Hamburguesa Doble" (keyup.enter)="buscar(termino.value)" #termino>
+            <button (click)="buscar(termino.value)"><i class="fas fa-search"></i></button>
+        </form>
+    </div>
+    <div class="comandos">
+
+        <ng-container *ngIf="user$ | async; else noLogueado">
+            <!-- *ngIf="esCliente() | async" -->
+            <button *ngIf="currentRol === 'cliente'" mat-raised-button [routerLink]="[ '/user/cart']">
+                <mat-icon style="color: rgb(223, 0, 0);">shopping_cart
+                </mat-icon>
+            </button>
+            <button mat-raised-button [matMenuTriggerFor]="menu" style="margin-left: 1vw;">
+                <mat-icon>person
+                </mat-icon>
+            </button>
+            
+            <mat-menu #menu="matMenu" class="animated fadeInRight">
+                <button mat-menu-item [routerLink]="[ '/user/profile']" *ngIf="currentRol == 'cliente'">
+                    Mi Perfil
+                </button>
+                <button *ngIf="currentRol == 'gerente'|| currentRol == 'cocinero'; else opcionCajero" mat-menu-item [routerLink]="[ '/manager']">
+                    Administración de Stock
+                </button>
+                <ng-template #opcionCajero>
+                    <button *ngIf="currentRol == 'cajero'" mat-menu-item [routerLink]="[ '/manager']">
+                        Facturación
+                    </button>
+                </ng-template>
+                <button *ngIf="currentRol == 'delivery'" mat-menu-item [routerLink]="[ '/delivery']">
+                    Administración de Entregas
+                </button>
+                <button *ngIf="currentRol == 'cajero' || currentRol == 'gerente'" mat-menu-item
+                    [routerLink]="[ '/cashier']">
+                    Administración de Caja
+                </button>
+                <button *ngIf="currentRol == 'cocinero' || currentRol == 'gerente'" mat-menu-item
+                    [routerLink]="[ '/chef']">
+                    Administración de Cocina
+                </button>
+                <button mat-menu-item (click)="salir()">Salir <mat-icon>exit_to_app</mat-icon> </button>
+            
+            </mat-menu>
+        
+        </ng-container>
+
+
+        <ng-template #noLogueado>
+
+            <button mat-raised-button [class.mat-elevation-z4]="true"
+                [routerLink]="[ '/user/login']"><span>INGRESAR</span>
+                <mat-icon>person
+                </mat-icon>
+            </button>
+
+        </ng-template>
+
+        <!-- usa estos botones para debuguear errores de logueo -->
+        <!-- <button (click)="salir()">salir</button>
+        <button (click)="estaAutenticado()">Esta autenticado</button> -->
+
+
+
+    </div>
+</div>

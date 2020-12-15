@@ -1,0 +1,56 @@
+#marco {
+  margin: auto;
+  max-width: 400px;
+  margin-top: 10vh;
+  margin-bottom: 15vh;
+  border-radius: 20px;
+  padding: 0px 20px 20px 20px;
+}
+
+#cabecera {
+  width: 100%;
+  height: 1px;
+  position: relative;
+  text-align: center;
+  margin-bottom: 70px;
+}
+
+#cabecera .cont-imagen {
+  margin: auto;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+
+#marco .cont-imagen img {
+  position: relative;
+  top: -50px;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+}
+
+#marco #formulario mat-form-field {
+  display: block;
+  margin-top: 10px;
+}
+
+#formulario {
+  text-align: center;
+}
+
+#formulario button {
+  margin-top: 10px;
+  width: 80%;
+  background-color: #1f6ee4;
+  color: white;
+}
+
+#formulario .google {
+  background-color: #dd4b39;
+}
+
+.cont-link {
+  margin-top: 15px;
+  text-align: center;
+}

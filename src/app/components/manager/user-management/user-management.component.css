@@ -1,0 +1,57 @@
+.comandos {
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 2vh;
+  padding-right: 2vw;
+}
+.comandos button {
+  float: right;
+}
+
+.tabla {
+  margin-top: 2vh;
+}
+
+/* ===================================================== */
+
+mat-paginator {
+  display: flex;
+  justify-content: center;
+}
+
+mat-cell,
+mat-header-cell {
+  display: flex;
+  justify-content: center;
+}
+::ng-deep .mat-progress-bar {
+  border-radius: 2px;
+}
+
+/* ===================================================== 
+                  Estilos del buscador
+ ===================================================== */
+
+ .buscador input {
+  border: none;
+  width: 15vw;
+  border-radius: 15px 0px 0px 15px;
+  border-color: black;
+  background-color: gainsboro;
+  text-align: center;
+}
+
+.buscador button.my-editar  {
+  border: none;
+  border-radius: 0px 15px 15px 0px;
+  background-color: yellow;
+}
+
+.preTabla{
+display: flex;
+justify-content: space-between;
+padding-right: 5vw;
+padding-left: 1vw;
+padding-top: 0.5vw;
+padding-bottom: 0.5vw;
+}

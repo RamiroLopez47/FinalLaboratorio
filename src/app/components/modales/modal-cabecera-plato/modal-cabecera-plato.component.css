@@ -1,0 +1,122 @@
+.contenedor {
+  text-align: center;
+  min-width: 50vw;
+}
+
+#formulario #encabezado {
+  padding-left: 2em;
+  text-align: left;
+  background-color: #df0000;
+  line-height: 3em;
+  color: white;
+  font-weight: bold;
+}
+
+#formulario {
+  width: 100%;
+  box-sizing: border-box;
+  margin: auto;
+}
+
+#formulario form {
+  overflow: hidden;
+}
+
+#formulario mat-form-field,
+.campo {
+  box-sizing: border-box;
+  display: inline-block;
+  margin: 0.5%;
+  width: 32.33%;
+}
+
+#formularioDetalle mat-form-field,
+.campo {
+  width: 24%;
+}
+
+mat-radio-button {
+  margin-left: 10%;
+}
+
+.comandos {
+  width: 50%;
+  margin: auto;
+  display: flex;
+  justify-content: space-around;
+}
+
+/* ================================= */
+/* TABLA DETALLE PEDIDO  */
+/* ================================= */
+#tablaDetallePedido thead tr th,
+tbody tr td {
+  text-align: center;
+}
+
+#tablaDetallePedido {
+  margin: 0px auto;
+  width: 90%;
+}
+
+#tablaDetallePedido thead {
+  background-color: black;
+  color: white;
+}
+
+.tabla-scroll {
+  width: 100% !important;
+  border: 1px solid black;
+  display: block;
+}
+
+.tabla-scroll::-webkit-scrollbar {
+  width: 7px;
+  background-color: white;
+}
+
+.tabla-scroll::-webkit-scrollbar-thumb{
+  background-color: black;
+  border-radius: 2px;
+}
+
+.tabla-scroll .fila {
+  width: 100%;
+  display: flex;
+}
+
+.tabla-scroll .fila:nth-child(obb) {
+  background-color: rgb(194, 194, 194);
+}
+.tabla-scroll .fila:nth-child(even) {
+  background-color: rgb(233, 233, 233);
+}
+
+.tabla-scroll .fila .columna {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  width: 25%;
+  box-sizing: border-box;
+}
+#tablaDetallePedido tr {
+  width: 100% !important;
+  display: flex;
+}
+
+#tablaDetallePedido tr th,
+td {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.tabla-scroll {
+  overflow-y: scroll;
+  max-height: 200px;
+}
+
+.recetario textarea{
+  resize: none;
+  height: 16vh;
+}

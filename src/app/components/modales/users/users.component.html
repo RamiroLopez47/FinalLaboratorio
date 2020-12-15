@@ -1,0 +1,237 @@
+<div class="contenedor">
+  <div id="formulario">
+    <div id="encabezado">
+      <span>NUEVO USUARIO</span>
+    </div>
+
+    <form [formGroup]="forma" novalidate="novalidate">
+      <mat-horizontal-stepper>
+        <mat-step label="Información Básica">
+          <!-- CAMPO Nombre -->
+          <mat-form-field appearance="standard">
+            <mat-icon matPrefix> account_box</mat-icon>
+            <mat-label>Nombre</mat-label>
+            <input matInput formControlName="nombre" />
+            <mat-error>
+              Ingrese el nombre del usuario
+            </mat-error>
+          </mat-form-field>
+
+          <!-- CAMPO Apellido  -->
+          <mat-form-field appearance="standard">
+            <mat-icon matPrefix> account_box</mat-icon>
+            <mat-label>Apellido</mat-label>
+            <input matInput formControlName="apellido" />
+            <mat-error>
+              Ingrese el apellido del usuario
+            </mat-error>
+          </mat-form-field>
+
+          <!-- CAMPO Rol  -->
+          <mat-form-field appearance="standard">
+            <mat-label>Rol</mat-label>
+            <mat-select formControlName="rol">
+              <mat-option *ngFor="let rol of roles" [value]="rol">
+                {{ rol.denominacion }}</mat-option
+              >
+            </mat-select>
+            <mat-error>
+              Seleccione el rol del usuario
+            </mat-error>
+          </mat-form-field>
+
+          <!-- CAMPO Teléfono  -->
+          <mat-form-field appearance="standard">
+            <mat-icon matPrefix> call</mat-icon>
+            <mat-label>Teléfono</mat-label>
+            <input matInput type="text" formControlName="telefono" />
+            <mat-error>
+              Ingrese un numero de telefono valido
+            </mat-error>
+          </mat-form-field>
+
+          <!-- CAMPO Email  -->
+          <mat-form-field appearance="standard">
+            <mat-icon matPrefix> email</mat-icon>
+            <mat-label>Email</mat-label>
+            <input matInput type="email" formControlName="email" />
+            <mat-error>
+              Ingrese un email valido del usuario
+            </mat-error>
+          </mat-form-field>
+
+          <!-- CAMPO Contraseña  -->
+          <mat-form-field appearance="standard">
+            <mat-label>Contraseña</mat-label>
+            <mat-icon
+              matSuffix
+              (click)="alterVerPass()"
+              *ngIf="mostrarPass"
+              class="pointer"
+              >visibility
+            </mat-icon>
+            <mat-icon
+              matSuffix
+              (click)="alterVerPass()"
+              *ngIf="!mostrarPass"
+              class="pointer"
+              >visibility_off
+            </mat-icon>
+            <input matInput [type]="tipo" formControlName="password" />
+            <mat-error>
+              Ingrese una contraseña (6 caracters minimo y 10 maximo)
+            </mat-error>
+          </mat-form-field>
+        </mat-step>
+        <!-- ====================================================== -->
+        <!-- SEGUNDO PASO  -->
+        <!-- ====================================================== -->
+
+        <mat-step label="Dirección">
+          <form [formGroup]="forma2" id="formularioDomicilio">
+            <!-- CAMPO Departamento  -->
+            <mat-form-field appearance="standard">
+              <mat-label>Departamento</mat-label>
+              <mat-select>
+                <mat-option
+                  *ngFor="let departamento of listaDepartamentos"
+                  [value]="departamento"
+                >
+                  {{ departamento.denominacion }}</mat-option
+                >
+              </mat-select>
+              <mat-error>
+                Seleccione un departamento
+              </mat-error>
+            </mat-form-field>
+
+            <!-- CAMPO Localidad  -->
+            <mat-form-field appearance="standard">
+              <mat-label>Localidad</mat-label>
+              <mat-select formControlName="localidad">
+                <mat-option
+                  *ngFor="let localidad of listaLocalidades"
+                  [value]="localidad"
+                >
+                  {{ localidad.denominacion }}</mat-option
+                >
+              </mat-select>
+              <mat-error>
+                Selecione una localidad
+              </mat-error>
+            </mat-form-field>
+
+            <!-- CAMPO Barrio  -->
+            <mat-form-field appearance="standard">
+              <mat-icon matPrefix>home</mat-icon>
+              <mat-label>Barrio</mat-label>
+              <input matInput type="text" formControlName="barrio"/>
+              <mat-error>
+                Ingrese un barrio
+              </mat-error>
+            </mat-form-field>
+
+            <!-- CAMPO CALLE -->
+            <mat-form-field appearance="standard">
+              <mat-icon matPrefix>traffic</mat-icon>
+              <mat-label>Calle</mat-label>
+              <input matInput type="text" formControlName="calle"/>
+              <mat-error>
+                Ingrese una calle
+              </mat-error>
+            </mat-form-field>
+
+            <!-- CAMPO Manzana -->
+            <mat-form-field appearance="standard">
+              <mat-icon matPrefix>title</mat-icon>
+              <mat-label>Manzana</mat-label>
+              <input matInput type="text" formControlName="manzana" />
+              <mat-error>
+                Ingrese una manzana
+              </mat-error>
+            </mat-form-field>
+
+            <!-- CAMPO Altura -->
+            <mat-form-field appearance="standard">
+              <mat-icon matPrefix>home</mat-icon>
+              <mat-label>Numero de casa</mat-label>
+              <input matInput type="number" formControlName="numero"/>
+              <mat-error>
+                Ingrese un numero (Asegúrese de que el valor sea un numero positivo)
+              </mat-error>
+            </mat-form-field>
+
+            <!-- CAMPO Piso -->
+            <mat-form-field appearance="standard">
+              <mat-icon matPrefix>domain</mat-icon>
+              <mat-label>Piso</mat-label>
+              <input matInput type="number" formControlName="piso"/>
+              <mat-error>
+                Ingrese un piso (Asegúrese de que el valor sea un numero positivo)
+              </mat-error>
+            </mat-form-field>
+
+            <!-- CAMPO Puerta -->
+            <mat-form-field appearance="standard">
+              <mat-icon matPrefix>sensor_door</mat-icon>
+              <mat-label>Puerta</mat-label>
+              <input matInput type="string" formControlName="puerta" />
+              <mat-error>
+                Ingrese una puerta
+              </mat-error>
+            </mat-form-field>
+          </form>
+        </mat-step>
+
+        <!-- ====================================================== -->
+        <!-- TERCER PASO  -->
+        <!-- ====================================================== -->
+
+        <mat-step label="Datos Del Empleado">
+          <!-- CAMPO DNI -->
+          <mat-form-field appearance="standard">
+            <mat-icon matPrefix> picture_in_picture</mat-icon>
+            <mat-label>DNI</mat-label>
+            <input matInput formControlName="dni" />
+          </mat-form-field>
+
+          <!-- CAMPO Fecha de Ingreso -->
+          <mat-form-field appearance="standard">
+            <mat-label>Fecha de Ingreso</mat-label>
+            <input
+              matInput
+              type="date"
+              formControlName="fechaIngresoEmpleado"
+            />
+          </mat-form-field>
+
+          <!-- CAMPO Esta Activo  -->
+          <div class="campo">
+            <label for="fotografia"
+              >Está activo? <i class="fa fa-user-o" aria-hidden="true"></i
+            ></label>
+            <mat-radio-group formControlName="estaActivo">
+              <mat-radio-button [value]="true">Sí</mat-radio-button>
+              <mat-radio-button [value]="false">No</mat-radio-button>
+            </mat-radio-group>
+          </div>          
+
+                    <!-- ============================================== -->
+                    <!--                    BOTONES                     -->
+                    <!-- ============================================== -->
+
+          <div class="comandos">
+           <button mat-raised-button class="my-eliminar" (click)="onNoClick()">CANCELAR</button>
+
+           <button *ngIf="!(this.forma.valid && this.forma2.valid)" mat-raised-button class="my-disabledButton" disabled="true">AÑADIR</button>
+
+           <button *ngIf="(this.forma.valid && this.forma2.valid)" mat-raised-button class="my-agregar"(click)="crearNuevo()">AÑADIR</button>
+         
+          </div>
+
+        </mat-step>
+      </mat-horizontal-stepper>
+    </form>  <!-- Acá termina this.forma -->
+    <br />
+  </div>
+</div>

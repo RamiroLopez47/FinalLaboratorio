@@ -1,0 +1,62 @@
+.contenedorDetalles{
+    text-align: center;
+    background-color: rgb(0, 0, 0);
+    padding: 10px;
+  }
+  
+  .contenedorDetalles div{
+    font-weight: bold;
+    color: white;
+    text-transform: capitalize;
+  }
+  .contenedorDetalles img{
+    max-width: 30vw;
+    max-height: 150px;
+    object-fit: contain;
+    border: 3px solid white;
+    margin: 1vh 0px
+  }
+  mat-sidenav-container {
+    min-height: 80vh;
+  }
+  
+  mat-sidenav{
+    padding: 10px;
+    min-width: 20vw;
+  }
+  
+  mat-sidenav-content{
+    background-color: transparent;
+  }
+
+  .detalleIngrediente{
+      overflow-y: scroll;
+      max-height: 200px;
+  }
+  /* ===================================================== 
+                  Estilos del buscador
+ ===================================================== */
+
+.buscador input {
+  border: none;
+  width: 15vw;
+  border-radius: 15px 0px 0px 15px;
+  border-color: black;
+  background-color: gainsboro;
+  text-align: center;
+}
+
+.buscador button.my-editar  {
+  border: none;
+  border-radius: 0px 15px 15px 0px;
+  background-color: yellow;
+}
+
+.preTabla{
+display: flex;
+justify-content: space-between;
+padding-right: 5vw;
+padding-left: 1vw;
+padding-top: 0.5vw;
+padding-bottom: 0.5vw;
+}

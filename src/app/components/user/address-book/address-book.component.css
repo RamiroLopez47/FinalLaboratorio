@@ -1,0 +1,140 @@
+.contenedor {
+  overflow: hidden;
+}
+
+.tarjetas {
+  overflow: hidden;
+  padding-bottom: 5vh;
+  border-radius: 15px;
+  background: rgb(255, 183, 183);
+  background: linear-gradient(
+    315deg,
+    rgb(255, 175, 175) 0%,
+    rgba(255, 200, 196, 1) 6%,
+    rgba(255, 255, 255, 1) 100%
+  );
+}
+
+.tarjeta {
+  background-color: white;
+  float: left;
+  height: 145px;
+  width: 47%;
+  margin-left: 2%;
+  margin-top: 2em;
+  border-radius: 15px;
+  box-sizing: border-box;
+}
+
+.agregarNueva {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 3px rgb(92, 92, 92) dashed;
+  cursor: pointer;
+  transition-duration: 0.7s;
+  background-color: transparent;
+}
+
+.agregarNueva:hover {
+  background-color: white;
+  border: 3px rgb(92, 92, 92) solid;
+  -webkit-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
+  transform: translateY(-8px);
+  /* background-color: rgb(255, 210, 210); */
+}
+
+.agregandoNueva {
+  background-color: white;
+  border: 2px rgb(92, 92, 92) solid;
+  -webkit-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 5px 8px 0px rgba(0, 0, 0, 0.75);
+  transform: translateY(-8px);
+}
+
+.agregandoNueva button {
+  width: 50%;
+  max-height: 30px;
+  line-height: 1em;
+}
+
+
+.agregarNueva > p {
+  line-height: 1em;
+  font-size: 1.5em;
+  color: rgb(180, 180, 180);
+}
+.legal {
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.legal button.principal {
+  background-color: rgb(251, 255, 0);
+  border-radius: 15px 0px 0px 0px;
+  width: 50%;
+}
+
+.legal button.editar {
+  width: 50%;
+  background-color: rgb(251, 255, 0);
+}
+
+.save {
+  background-color: green;
+  color: white;
+  width: 50%;
+}
+
+.legal button.delete {
+  width: 50%;
+  background-color: red;
+  color: white;
+  border-radius: 0px 15px 0px 0px;
+}
+
+.checked {
+  background-color: rgb(7, 44, 124) !important;
+  color: white !important;
+}
+
+table {
+  text-align: center;
+  width: 100%;
+}
+
+#fijos table tbody tr {
+  height: 1.9em;
+}
+
+form {
+  height: 100%;
+}
+
+input,
+select {
+  text-align: center;
+  width: 100% !important;
+}
+
+@media only screen and (max-width: 1023px) {
+  .tarjeta {
+    width: 96%;
+  }
+}
+
+.displayDomicilio th,
+td {
+  width: 25%;
+  box-sizing: border-box;
+}
+
+.noPuedeGuardar {
+  background-color: gray;
+  color: rgb(221, 221, 221);
+  width: 50%;
+}

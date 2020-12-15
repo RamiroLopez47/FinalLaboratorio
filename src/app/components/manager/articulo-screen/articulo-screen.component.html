@@ -1,0 +1,108 @@
+<mat-sidenav-container>
+    <mat-sidenav [(opened)]="sidenavOpened">
+        <div class="contenedorDetalles" *ngIf="articuloSeleccionado">
+            <div class="my-eliminar">Categoría : {{articuloSeleccionado.categoriaArticulo.denominacion}}</div>
+            <div class="my-eliminar">Denominación : {{articuloSeleccionado.denominacion}}</div>
+            <div>Descripción : {{articuloSeleccionado.descripcion}}</div>
+            <div *ngIf="articuloSeleccionado.esInsumo"> Es un insumo</div>
+            <div *ngIf="!articuloSeleccionado.esInsumo"> Es un producto para reventa</div>
+            <div>Precio de Compra : ${{articuloSeleccionado.precioCompra | number : '1.2-2'}}</div>
+            <div>Precio de Venta : ${{articuloSeleccionado.precioVenta | number : '1.2-2'}}</div>
+            <div>
+                <img src="{{articuloSeleccionado.imagen}}" alt="" onError="this.src='assets/img/noImage.jpg'">
+            </div>
+            <div [class]="verificarClase(calcularPorcentaje(articuloSeleccionado))" class="stockActual"
+                style="display: block; text-align: center;">
+
+                <span style="width: 100%;">{{articuloSeleccionado.stockActual}}
+                    {{articuloSeleccionado.medidaArticulo.denominacion}}</span><br>
+                <mat-progress-bar mode="determinate" [value]="calcularPorcentaje(articuloSeleccionado)">
+                </mat-progress-bar>
+            </div>
+            <div>Stock Mínimo : {{articuloSeleccionado.stockMin}} {{articuloSeleccionado.medidaArticulo.denominacion}}</div>
+            <div>Stock Máximo : {{articuloSeleccionado.stockMax}} {{articuloSeleccionado.medidaArticulo.denominacion}}</div>
+        </div>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <!-- ACA VA TODO EL CONTENIDO PRINCIPAL  -->
+
+        <!-- <div class="contenedor"> -->
+            <div class="preTabla">
+                <div class="agregar">
+                    <!-- <button mat-raised-button class="my-configurar" (click)="sidenavOpened = !sidenavOpened">
+                    <mat-icon>settings</mat-icon>
+                </button> -->
+                    <button mat-raised-button class="my-agregar ml-3" (click)="agregarNuevo()">Agregar</button>
+        
+                </div>
+                <div class="buscador">
+                    <input placeholder="Filtrar elementos" (keyup)="filtrar($event.target.value)" #termino>
+                    <button class="my-editar" (click)="filtrar(termino.value)">
+                        <i class="fas fa-search">
+        
+                        </i>
+                    </button>
+                </div>
+            </div>
+        
+        <div class="tabla" class="mat-elevation-z8">
+            <mat-table [dataSource]="dataSource" matSort>
+
+                <!-- denominacion Column -->
+                <ng-container matColumnDef="denominacion">
+                    <mat-header-cell mat-sort-header *matHeaderCellDef> Denominación </mat-header-cell>
+                    <mat-cell class="pointer" *matCellDef="let element" (click)="verDetalles(element)">
+                        {{element.denominacion | titlecase}} </mat-cell>
+                </ng-container>
+
+                <!-- descripcion Column -->
+                <ng-container matColumnDef="descripcion">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Descripcion </mat-header-cell>
+                    <mat-cell class="pointer" *matCellDef="let element" (click)="verDetalles(element)">
+                        {{element.descripcion | titlecase}} </mat-cell>
+                </ng-container>
+
+
+                <!-- Total stockActual -->
+                <ng-container matColumnDef="stockActual">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Cantidad Actual </mat-header-cell>
+                    <mat-cell *matCellDef="let element" [class]="verificarClase(calcularPorcentaje(element))"
+                        class="stockActual pointer" style="display: block; text-align: center;" (click)="verDetalles(element)">
+
+                        <span style="width: 100%;">{{element.stockActual}}
+                            {{element.medidaArticulo.denominacion}}</span><br>
+                        <mat-progress-bar mode="determinate" [value]="calcularPorcentaje(element)">
+                        </mat-progress-bar>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- Tipo de Entrega categoriaArticulo -->
+                <ng-container matColumnDef="categoriaArticulo">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Categoría </mat-header-cell>
+                    <mat-cell class="pointer" *matCellDef="let element" (click)="verDetalles(element)">
+                        {{element.categoriaArticulo.denominacion | titlecase}} </mat-cell>
+                </ng-container>
+
+                <!-- Acciones Column -->
+                <ng-container matColumnDef="actions">
+                    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                    <mat-cell *matCellDef="let element" style="display: flex; justify-content: center;">
+                        <button mat-mini-fab class="my-editar" (click)="editar(element)">
+                            <mat-icon [inline]="true">create</mat-icon>
+                        </button>
+                        <button mat-mini-fab class="my-eliminar" (click)="eliminar(element)">
+                            <mat-icon [inline]="true">delete_forever</mat-icon>
+                        </button>
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns.concat('actions')"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns.concat('actions');"></mat-row>
+
+            </mat-table>
+            <mat-paginator [pageSizeOptions]="[5,10,20]" showFirstLastButtons aria-label="etiqueta">
+            </mat-paginator>
+        </div>
+        <!-- </div> -->
+    </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,62 @@
+<div class="contenedor">
+    <!-- <agm-map [latitude]="latitud" [longitude]="longitud" [zoom]="15">
+        <agm-marker [latitude]="latitud" [longitude]="longitud"></agm-marker>
+    </agm-map> -->
+
+    <!-- <google-map height="500px" width="100%" [zoom]="15" [center]="coordenadas" [zoom]="16">
+        <map-marker [position]="coordenadas">
+        </map-marker>
+    </google-map> -->
+    <table class="table table-striped">
+        <tr>
+            <th>Cliente</th>
+            <td>{{pedido.cliente.apellido | uppercase}},{{pedido.cliente.nombre}}</td>
+        </tr>
+        <tr>
+            <th>Teléfono</th>
+            <td><a href="tel:pedido.cliente.telefono">{{pedido.cliente.telefono}}</a></td>
+        </tr>
+        <tr>
+            <th>Domicilio</th>
+            <td>
+                <p>
+                    <span>
+                        <b>{{pedido.domicilio.localidad.denominacion}} -
+                            {{pedido.domicilio.localidad.departamento.denominacion}}
+                        </b>
+                    </span>
+                    <span>
+                        {{pedido.domicilio.calle}}
+                        {{pedido.domicilio.manzana ? ('Manzana: '+pedido.domicilio.manzana) : ''}}
+                        - {{pedido.domicilio.numero}} |
+                        {{pedido.domicilio.barrio ? ('Barrio: '+ pedido.domicilio.barrio) : ''}}
+                    </span><br>
+                    <span>
+                        {{pedido.domicilio.piso ? ('Piso: '+pedido.domicilio.piso): ''}}
+                        {{pedido.domicilio.puerta ? ('Puerta: '+pedido.domicilio.puerta): ''}}
+                    </span>
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Hora Pedido
+            </th>
+            <td>
+                {{pedido.fecha | date: 'EEEE'}} a las {{pedido.fecha | date: 'HH:mm'}}
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Hora Limite de Entrega
+            </th>
+            <td>
+                {{pedido.horaEstimadaFin | date:'EEEE'}} a las {{pedido.horaEstimadaFin | date:'HH:mm'}}
+            </td>
+        </tr>
+    </table>
+
+    <button mat-raised-button class="my-salir" (click)="cerrar()">
+        <mat-icon>close</mat-icon>
+    </button>
+</div>

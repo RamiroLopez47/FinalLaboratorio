@@ -1,0 +1,90 @@
+<mat-sidenav-container>
+    <mat-sidenav [(opened)]="sidenavOpened">
+        <div class="contenedorDetalles" *ngIf="platoSeleccionado">
+            <!-- {{platoSeleccionado | json}} -->
+            <div class="my-eliminar">Categoría : {{platoSeleccionado.categoriaPlato.denominacion}}</div>        
+            <div class="my-eliminar">Denominación : {{platoSeleccionado.denominacion}}</div>        
+            <div>Precio de Venta : ${{platoSeleccionado.precioVenta | number : '1.2-2'}}</div>        
+            <div>Tiempo de Preparacion : {{platoSeleccionado.tiempoPreparacion | number : '1.0'}} minutos</div>        
+            <div>
+                <img src="{{platoSeleccionado.imagen}}" alt="" onError="this.src='assets/img/noImage.jpg'">
+            </div>
+            <div class="detalleIngrediente">
+                <div *ngFor="let item of platoSeleccionado.detallePlato">
+                    <div class="filaRegistro">
+                        {{item.articulo.denominacion}} {{item.cantidad | number:'1.2-2'}} {{item.articulo.medidaArticulo.denominacion}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <!-- ACA VA TODO EL CONTENIDO PRINCIPAL -->        
+            <div class="preTabla">
+                <div class="agregar">                    
+                    <button mat-raised-button class="my-agregar ml-3" (click)="agregarNuevo()"><mat-icon>add</mat-icon> Plato</button>
+                    <button mat-raised-button class="my-agregar ml-3" (click)="agregarNuevoReventa()"><mat-icon>add</mat-icon> Envasados</button>        
+                </div>
+                <div class="buscador">
+                    <input placeholder="Filtrar elementos" (keyup)="filtrar($event.target.value)" #termino>
+                    <button class="my-editar" (click)="filtrar(termino.value)">
+                        <i class="fas fa-search">
+        
+                        </i>
+                    </button>
+                </div>
+            </div>
+        
+        <div class="tabla" class="mat-elevation-z8">
+            <mat-table [dataSource]="dataSource" matSort>
+                <!-- denominacion Column -->
+                <ng-container matColumnDef="denominacion">
+                    <mat-header-cell mat-sort-header *matHeaderCellDef> Denominación </mat-header-cell>
+                    <mat-cell *matCellDef="let element" class="pointer" (click)="verDetalles(element)">
+                        {{element.denominacion | titlecase}} </mat-cell>
+                </ng-container>
+
+                <!-- tiempo de preparacion Column-->
+                <ng-container matColumnDef="tiempoPreparacion">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Tiempo de Preparacion </mat-header-cell>
+                    <mat-cell *matCellDef="let element" class="pointer" (click)="verDetalles(element)">
+                        {{element.tiempoPreparacion}} minutos</mat-cell>
+                </ng-container>
+
+                <!-- precio de venta column -->
+                <ng-container matColumnDef="precioVenta">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Precio de Venta </mat-header-cell>
+                    <mat-cell *matCellDef="let element" class="pointer" (click)="verDetalles(element)">
+                        $ {{element.precioVenta | number : '1.2-2'}} </mat-cell>
+                </ng-container>
+
+                <!-- categoriaPlato column -->
+                <ng-container matColumnDef="categoriaPlato">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Categoria Plato </mat-header-cell>
+                    <mat-cell *matCellDef="let element" class="pointer" (click)="verDetalles(element)">
+                        {{element.categoriaPlato.denominacion}}
+                    </mat-cell>
+                </ng-container>
+
+                <!-- Acciones Column -->
+                <ng-container matColumnDef="actions">
+                    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                    <mat-cell *matCellDef="let element" style="display: flex; justify-content: center;">
+                        <button mat-mini-fab class="my-editar" (click)="editar(element)">
+                            <mat-icon [inline]="true">create</mat-icon>
+                        </button>
+                        <button mat-mini-fab class="my-eliminar" (click)="eliminar(element)">
+                            <mat-icon [inline]="true">delete_forever</mat-icon>
+                        </button>
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns.concat('actions')"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns.concat('actions');"></mat-row>
+
+            </mat-table>
+            <mat-paginator [pageSizeOptions]="[5,10,20]" showFirstLastButtons aria-label="etiqueta">
+            </mat-paginator>
+        </div>        
+    </mat-sidenav-content>
+</mat-sidenav-container>

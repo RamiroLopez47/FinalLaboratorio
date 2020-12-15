@@ -1,0 +1,13 @@
+<app-toolbar>
+</app-toolbar>
+<!-- Este div es para empujar todo el contenido 50px debido a que el navbar flota por encima -->
+<div style="display: block; height: 50px;"></div>
+<!-- este div que contiene al router outlet le da un min heigh a las paginas para que no se compacte el footer
+con el navbar cuando no hay contenido en la pagina -->
+<div style="min-height: 70vh;">
+    <router-outlet>
+    </router-outlet>
+</div>
+
+<app-footer>
+</app-footer>

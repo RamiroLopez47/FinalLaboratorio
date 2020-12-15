@@ -1,0 +1,66 @@
+<div class="container">
+    <div id="marco" [class.mat-elevation-z4]="true" class="animated fadeInLeft">
+        <div id="cabecera">
+            <div class="cont-imagen">
+                <img src="../../../../assets/img/logo/logo.jpg" alt="">
+            </div>
+        </div>
+        <div id="formulario">
+            <form [formGroup]="forma" novalidate="novalidate">
+                <mat-form-field appearance="legacy">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput formControlName="nombre" type="text">
+                    <mat-error>
+                        Ingrese un nombre
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="legacy">
+                    <mat-label>Apellido</mat-label>
+                    <input matInput formControlName="apellido">
+                    <mat-error>
+                        Ingrese un apellido
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="legacy">
+                    <mat-label>Teléfono</mat-label>
+                    <input matInput type="text" formControlName="telefono">
+                    <mat-error>
+                        Ingrese un numero de telefono valido
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="legacy">
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="email">
+                    <!-- <mat-error *ngIf="errorCorreoEnUso">El correo ya esta en uso</mat-error> -->
+                </mat-form-field>
+
+                <mat-form-field appearance="legacy">
+                    <mat-label>Contraseña</mat-label>
+                    <input matInput type="password" formControlName="password">
+                    <mat-error>
+                        Ingrese una contraseña (6 caracters minimo y 10 maximo)
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="legacy">
+                    <mat-label>Repetir Contraseña</mat-label>
+                    <input matInput type="password" formControlName="rePass">
+                    <mat-error>Las contraseñas no coinciden</mat-error>
+                </mat-form-field>
+                <button mat-raised-button class="ingresar my-disabledButton"
+                    *ngIf="!(this.forma.valid && this.forma.value.password === this.forma.value.rePass)"
+                    disabled="true">INGRESAR</button>
+                <button mat-raised-button class="ingresar" (click)="registerWithEmail()"
+                    *ngIf="this.forma.valid && this.forma.value.password === this.forma.value.rePass">INGRESAR</button>
+            </form>
+            <button mat-raised-button class="google" (click)="registerWithGoogle()"><i class="fab fa-google-plus-g"></i>
+                Ingresar Con Google</button>
+        </div>
+        <div class="cont-link">
+            <p><a [routerLink]="[ '/user/login']">Ya tengo cuenta</a></p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,306 @@
+<div class="columnas">
+
+    <!-- ===============E==S==P==E==R==A================ -->
+
+
+    <div class="cont-columna espera">
+        <span class="titulo">ESPERANDO APROBACIÓN</span>
+        <div class="tarjetas" [class.mat-elevation-z8]="true">
+            <!-- ESTA PARTE ES LA QUE DEBE REPETIRSE -->
+            <div class="tarjeta pointer" [class.mat-elevation-z8]="true"
+                *ngFor="let pedidoDeAprobacion of esperandoAprobacion; let iaprobacion = index">
+                <div class="cabecera" (click)="verDetalles(pedidoDeAprobacion)">
+                    <div class="numeroPedido">#{{pedidoDeAprobacion.id}}</div>
+                    <div class="simbolo"><i class="fas fa-money-bill-wave"></i></div>
+                    <div class="precio">${{pedidoDeAprobacion.precioFinal | number:'1.2-2'}}</div>
+                </div>
+                <div class="datos">
+
+                    <!-- En esta condicion se coloca si es por delivey o no  -->
+                    <ng-container *ngIf="pedidoDeAprobacion.conDelivery; else tienda">
+                        <span class="direccion">
+                            {{pedidoDeAprobacion.domicilio.localidad.denominacion | uppercase}} -
+                            {{pedidoDeAprobacion.domicilio.localidad.departamento.denominacion | uppercase}}
+                        </span>
+                        <img src="../../../../assets/img/cashier/moto.png" alt="">
+                    </ng-container>
+                    <ng-template #tienda>
+                        <img src="../../../../assets/img/cashier/tienda.png" alt="">
+                    </ng-template>
+                    <!-- ====================== oooo ============ -->
+
+                    <span class="cliente"><b>CLIENTE: {{pedidoDeAprobacion.cliente.apellido | uppercase}},
+                            {{pedidoDeAprobacion.cliente.nombre}}</b></span>
+
+                    <div class="items animated zoomIn">
+                        <hr>
+                        <table class="table table-striped table-light">
+                            <tbody>
+                                <tr *ngFor="let detalle of pedidoDeAprobacion.detallesPedido">
+                                    <td>{{detalle.plato.denominacion}}</td>
+                                    <td>x{{detalle.cantidad}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="comandos">
+                        <button mat-raised-button class="my-eliminar"
+                            (click)="rechazarPedido(iaprobacion)">RECHAZAR</button>
+                        <button mat-raised-button class="my-agregar"
+                            (click)="aprobarPedido(iaprobacion)">ACEPTAR</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- ==========R==E==T==I==R==O============= -->
+
+
+
+    <div class="cont-columna retiro">
+        <span class="titulo">ESPERANDO RETIRO</span>
+        <div class="tarjetas" [class.mat-elevation-z8]="true">
+            <!-- ESTA PARTE ES LA QUE DEBE REPETIRSE  -->
+            <div class="tarjeta" [class.mat-elevation-z8]="true"
+                *ngFor="let pedidoDeRetiro of esperandoRetiro; let iretiro = index">
+
+                <div class="cabecera pointer"
+                    [ngClass]="{'aguardando': (pedidoDeRetiro.estado.denominacion == 'ESPERANDO_ASIGNACION')}"
+                    (click)="verDetalles(pedidoDeRetiro)"
+                    >
+                    <div class=" numeroPedido">#{{pedidoDeRetiro.id}}</div>
+                    <div class="simbolo"><i class="fas fa-money-bill-wave"></i></div>
+                    <div class="precio">${{pedidoDeRetiro.precioFinal | number:'1.2-2'}}</div>
+
+                </div>
+
+                <div class="datos">
+
+                    <span [ngSwitch]="pedidoDeRetiro.estado.denominacion">
+                        <div *ngSwitchCase="'ESPERANDO_ASIGNACION'">
+                            <span class="direccion">
+                                {{pedidoDeRetiro.domicilio.localidad.denominacion | uppercase}} -
+                                {{pedidoDeRetiro.domicilio.localidad.departamento.denominacion | uppercase}}
+                            </span>
+                            <img src="../../../../assets/img/cashier/moto.png" alt="">
+                            <span class="cliente"><b>Esperando Repartidor <i class="far fa-clock"></i></b></span>
+                        </div>
+
+                        <div *ngSwitchCase="'ESPERANDO_CLIENTE'">
+                            <img src="../../../../assets/img/cashier/tienda.png" alt="">
+                            <span class="cliente"><b>CLIENTE: {{pedidoDeRetiro.cliente.apellido | uppercase}},
+                                    {{pedidoDeRetiro.cliente.nombre}}</b></span>
+                        </div>
+
+                        <div *ngSwitchCase="'ESPERANDO_REPARTIDOR'">
+                            <img src="../../../../assets/img/cashier/moto.png" alt="">
+                            <span class="cliente"><b>OTORGADO A: {{pedidoDeRetiro.delivery.apellido | uppercase}},
+                                    {{pedidoDeRetiro.delivery.nombre}}</b></span>
+                        </div>
+                    
+                        <div *ngSwitchDefault>
+                            algo no salio bien
+                        </div>
+                    </span>
+                </div>
+                <!-- ====================== oooo ============ -->
+
+                <div [ngSwitch]="pedidoDeRetiro.estado.denominacion">
+                                       
+                    <div *ngSwitchCase="'ESPERANDO_CLIENTE'">
+                        <div class="comandos">                            
+                            <button mat-raised-button class="my-eliminar"
+                                (click)="canceloCliente(iretiro)">
+                                CANCELAR
+                            </button>
+                            <button mat-raised-button class="my-agregar"
+                                (click)="retiroCliente(iretiro)">
+                                RETIRÓ
+                            </button>                            
+                        </div>
+                    </div>
+                    <div *ngSwitchCase="'ESPERANDO_REPARTIDOR'">
+                        <div class="comandos">
+                            <!-- <button mat-raised-button class="my-eliminar">CANCELAR</button> -->
+                            <button mat-raised-button class="my-agregar"
+                                (click)="retiroDelivery(iretiro)">
+                                RETIRÓ
+                            </button>
+                            <button mat-raised-button class="my-eliminar" (click)="cancelarRetiro(iretiro)">
+                                CANCELAR
+                            </button>
+                        </div>
+                    </div>
+                    <div *ngSwitchDefault>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========E==N====C==O==C==I==N==A================= -->
+
+    <div class="cont-columna cocina">
+        <span class="titulo">EN COCINA</span>
+        <div class="tarjetas mat-elevation-z8">
+
+            <!-- ESTA PARTE SE REPITE  -->
+
+            <div class="tarjeta mat-elevation-z8" *ngFor="let pedidoEnCocina of enCocina">
+                <div class="cabecera pointer" (click)="verDetalles(pedidoEnCocina)">
+                    <div class="numeroPedido">#{{pedidoEnCocina.id}}</div>
+                    <div class="indicadores">
+                        <div [ngSwitch]="pedidoEnCocina.estado.denominacion">
+                            <div *ngSwitchCase="'COCINA'">
+                                <mat-icon aria-hidden="false" aria-label="Example home icon">
+                                    hourglass_top
+                                </mat-icon>
+                            </div>
+                            <div *ngSwitchCase="'PREPARANDO'">
+                                <mat-icon aria-hidden="false" aria-label="Example home icon">
+                                    outdoor_grill
+                                </mat-icon>
+                            </div>
+                            <div *ngSwitchDefault>
+                                No deberias ver este mensaje
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="datos">
+
+                    <table class="table table-striped table-light">
+                        <tbody>
+                            <tr>
+                                <td>Hora de Solicitud</td>
+                                <td>{{pedidoEnCocina.fecha | date:'d/M, HH:mm'}}hs</td>
+                            </tr>
+                            <tr>
+                                <td>Hora Estimada Finalización</td>
+                                <td>{{pedidoEnCocina.horaEstimadaFin | date:'d/M, HH:mm'}}hs</td>
+                            </tr>
+
+                            <tr>
+                                <td>Demoraría</td>
+                                <td>{{calcularDiferenciaEnMinutos(pedidoEnCocina)}}'</td>
+                            </tr>
+                            <tr>
+                                <td>Quedan</td>
+                                <td>{{calcularRetraso(pedidoEnCocina)}}'</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <span><b>CLIENTE: {{pedidoEnCocina.cliente.apellido | uppercase}},
+                            {{pedidoEnCocina.cliente.nombre}}</b></span>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ================================================= -->
+    <!-- EN REPARTO  -->
+    <!-- ================================================= -->
+
+    <div class="cont-columna reparto">
+        <span class="titulo">REPARTO</span>
+        <div class="tarjetas mat-elevation-z8">
+
+            <!-- ESTA PARTE SE REPITE  -->
+            <div class="tarjeta mat-elevation-z8" *ngFor="let pedidoEnReparto of enReparto; let ireparto = index">
+
+                <div class="cabecera pointer" (click)="verDetalles(pedidoEnReparto)">
+                    <div class="numeroPedido">#{{pedidoEnReparto.id}}</div>
+                    <div class="indicadores">
+                        <div [ngSwitch]="pedidoEnReparto.estado.denominacion">
+
+                            <!-- CABECERA PARA PEDIOS EN CAMINO  -->
+
+                            <div *ngSwitchCase="'EN_CAMINO'">
+                                <mat-icon aria-hidden="false" aria-label="Example home icon">
+                                    call_made</mat-icon>
+                                <mat-icon aria-hidden="false" aria-label="Example home icon">
+                                    sports_motorsports
+                                </mat-icon>
+                            </div>
+
+                            <!-- CABECERA PARA PEDIDOS ENTREGADOS  -->
+
+                            <div *ngSwitchCase="'ENTREGADO'">
+                                <mat-icon aria-hidden="false" aria-label="Example home icon">
+                                    call_received</mat-icon>
+                                <mat-icon aria-hidden="false" aria-label="Example home icon">
+                                    sports_motorsports
+                                </mat-icon>
+                            </div>
+                            <div *ngSwitchDefault>
+                                {{pedidoEnReparto.estado.denominacion}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DATOS  -->
+
+                <div class="datos">
+
+                    <table class="table table-striped table-light">
+                        <tbody>
+                            <tr>
+                                <td>Hora de Solicitud</td>
+                                <td>{{pedidoEnReparto.fecha | date:'d/M, HH:mm'}}hs</td>
+                            </tr>
+                            <tr>
+                                <td>Hora Estimada Finalización</td>
+                                <td>{{pedidoEnReparto.horaEstimadaFin | date:'d/M, HH:mm'}}hs</td>
+                            </tr>
+
+                            <tr *ngIf="pedidoEnReparto.estado.denominacion == 'EN_CAMINO'">
+                                <td>Demoraría</td>
+                                <td>{{calcularDiferenciaEnMinutos(pedidoEnReparto)}}'</td>
+                            </tr>
+                            <tr *ngIf="pedidoEnReparto.estado.denominacion == 'EN_CAMINO'">
+                                <td>Quedan</td>
+                                <td>{{calcularRetraso(pedidoEnReparto)}}'</td>
+                            </tr>
+                            <tr *ngIf="pedidoEnReparto.estado.denominacion == 'ENTREGADO'">
+                                <td>MONTO</td>
+                                <td>${{pedidoEnReparto.precioFinal | number:'1.2-2'}}</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    <span>
+                        <b>
+                            <ng-container
+                                *ngIf="pedidoEnReparto.estado.denominacion == 'EN_CAMINO'; else nombreRepartidor">
+                                CLIENTE: {{pedidoEnReparto.cliente.apellido | uppercase}},
+                                {{pedidoEnReparto.cliente.nombre}}
+                            </ng-container>
+                            <ng-template #nombreRepartidor>
+                                DELIVERY : {{pedidoEnReparto.delivery.apellido | uppercase}},
+                                {{pedidoEnReparto.delivery.nombre}}
+                            </ng-template>
+
+                        </b>
+                    </span>
+
+                </div>
+
+                <div class="comandos" *ngIf="pedidoEnReparto.estado.denominacion=='ENTREGADO'">
+                    <button mat-raised-button class="my-informar"
+                        (click)="recibirDineroDelivery(ireparto)">COBRADO</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>

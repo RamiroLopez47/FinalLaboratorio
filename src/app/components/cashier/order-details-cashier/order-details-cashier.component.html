@@ -1,0 +1,54 @@
+<div class="contenedor">
+    <div class="cabecera">
+        <div class="estado">{{pedido.estado.denominacion}}</div>
+        <div class="fecha">{{pedido.fecha | date:'short'}}</div>
+        <div class="precio">${{pedido.precioFinal | number:'1.2-2'}}</div>
+        <div class="estado">#{{pedido.id}}</div>
+    </div>
+    <div class="datos">
+        <table>
+            <tr>
+                <th>Cliente</th>
+                <td>{{pedido.cliente.apellido | uppercase}}, {{pedido.cliente.nombre}}</td>
+                <th>Teléfono</th>
+                <td><a href="tel:pedido.cliente.telefono">{{pedido.cliente.telefono}}</a></td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td><a href="mailto:pedido.cliente.email">{{pedido.cliente.email}}</a></td>
+                <th colspan="">Total</th>
+                <td colspan="">${{pedido.precioFinal | number : '1.2-2'}}</td>
+            </tr>
+            <tr>
+                <th>Fecha</th>
+                <td>{{pedido.fecha | date:'d/M/yy, h:mm a' }}</td>
+                <th>Tipo de entrega</th>
+                <td>{{pedido.conDelivery? "Con Entrega a Domicilio" : "Retiro en Local"}}</td>
+            </tr>
+            <tr>
+                <th>Domicilio De Entrega</th>
+                <td colspan="3">{{pedido.domicilio? formatearDomicilio(pedido.domicilio): "No Aplica"}}</td>
+            </tr>
+            <tr>
+                <th>Repartidor</th>
+                <td>{{pedido.conDelivery? (pedido.delivery?.apellido + ' ' + pedido.delivery?.nombre) : "No Aplica"}}</td>
+                <th>Fecha Estimada De Entrega</th>
+                <td>{{pedido.horaEstimadaFin | date:'d/M/yy, h:mm a' }}</td>
+            </tr>            
+        </table>
+        <div class="detalles">
+            <div class="encabezado" style="margin-right: 18px;">
+                <div class="columna">Item</div>
+                <div class="columna">Cantidad</div>
+                <div class="columna">SubTotal</div>
+            </div>
+            <div class="scroll">
+                <div class="tupla" *ngFor="let item of pedido.detallesPedido">
+                    <div class="columna">{{item.plato.denominacion | titlecase}}</div>
+                    <div class="columna">x{{item.cantidad}}</div>
+                    <div class="columna">${{item.subTotal | number: '1.2-2'}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

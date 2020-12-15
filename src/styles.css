@@ -1,0 +1,67 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "./assets/css/animate.css";
+/* font-family: 'Bebas Neue', cursive; */
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+/* font-family: 'Sriracha', cursive; */
+@import url('https://fonts.googleapis.com/css2?family=Sriracha&display=swap');
+
+@import '~saturn-datepicker/bundle.css';
+.my-shadow {
+  -webkit-box-shadow: 7px 9px 5px -4px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 7px 9px 5px -4px rgba(0, 0, 0, 0.75);
+  box-shadow: 7px 9px 5px -4px rgba(0, 0, 0, 0.75);
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.not-allowed {
+  cursor: not-allowed;
+}
+
+.my-agregar {
+  background-color: green !important;
+  color: white !important;
+}
+
+.my-eliminar {
+  background-color: red !important;
+  color: white !important;
+}
+
+.my-editar {
+  background-color: yellow !important;
+  color: black !important;
+}
+
+.my-configurar {
+  background-color: rgb(114, 37, 114);
+  color: white;
+}
+
+.my-informar {
+  background-color: #1f6ee4;
+  color: white;
+}
+
+.my-disabledButton {
+  background-color: gray !important;
+  color: rgb(197, 197, 197) !important;
+}
+
+.custom-dialog-container .mat-dialog-container {
+  padding: 0px;
+}
+
+.my-tooltip-red {
+  background-color: red;
+  text-transform: uppercase;
+}
+
+
+mat-cell,
+mat-header-cell {
+  justify-content: center;
+}

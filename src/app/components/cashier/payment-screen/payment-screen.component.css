@@ -1,0 +1,90 @@
+.container {
+  min-width: 50vw;
+  padding: 0;
+  padding: 0px 0px 20px 0px;
+}
+
+.encabezado {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.5em;
+  background-color: rgb(223, 0, 0);
+  color: white;
+  padding: 5px;
+}
+
+.navegador {
+  display: flex;
+  justify-content: space-between;
+  padding: 2px 5px;
+  align-items: center;
+}
+
+.navegador .monto {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.navegador .mat-button-toggle {
+  background-color: white;
+  color: rgb(79, 112, 163);
+  width: 80px !important;
+  min-width: unset !important;
+}
+
+.navegador .mat-button-toggle-checked {
+  color: white;
+  background-color: rgb(79, 112, 163);
+}
+
+.datos {
+  display: flex;
+  justify-content: space-around;
+}
+
+.datos mat-form-field {
+  margin: 0 5px;
+}
+.pie {
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+}
+
+.pie .comandos {
+  width: 30%;
+  display: flex;
+  justify-content: space-between;
+}
+/* ========================================= */
+/* CREDITO  */
+/* ========================================= */
+
+#credito .cuotas mat-radio-group mat-radio-button {
+  margin-left: 1vw;
+}
+
+#credito .cuotas mat-radio-group mat-radio-button:hover {
+  margin-left: 1vw;
+  background-color: rgb(233, 233, 233);
+}
+
+#credito .pie .montoCuota {
+  font-size: 1.5em;
+  font-weight: bold;
+  width: 50%;
+  box-sizing: border-box;
+}
+
+/* ================================== */
+/* EFECTIVO  */
+/* ================================== */
+
+#efectivo .datos {
+  align-items: center;
+}
+
+.vuelto {
+  font-size: 1.5em;
+  font-weight: bold;
+}

@@ -1,0 +1,310 @@
+/* TABLAS  */
+tr,td {
+  /* line-height: 1em; */
+  padding: 5px 0px;
+}
+
+hr {
+  margin: 5px;
+  margin-bottom: 7px;
+}
+
+button {
+  line-height: 1.7em;
+}
+
+/* CONFIGURACIONES GLOBALES  */
+.columnas {
+  padding-left: 2vw;
+  padding-right: 2vw;
+  margin-top: 4vh;
+
+  min-height: 80vh;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.cont-columna {
+  width: 24%;
+  text-align: center;
+}
+
+.cont-columna .titulo {
+  font-family: "Bebas Neue", cursive;
+  font-size: 2.5em;
+}
+
+.tarjetas::-webkit-scrollbar {
+  width: 7px;
+  background-color: white;
+}
+
+.tarjetas {
+  border-radius: 15px;
+  height: 80vh;
+  padding-top: 1px;
+  padding-right: 10px;
+  padding-left: 10px;
+  overflow: auto;
+}
+.tarjeta {
+  background-color: white;
+  min-height: 100px;
+  margin-top: 15px;
+  border-radius: 15px;
+  padding-bottom: 2px;
+}
+
+.tarjeta .cabecera {
+  padding-left: 10px;
+  padding-right: 10px;
+  color: white;
+  border-radius: 15px 15px 0px 0px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.5em;
+  line-height: 1.5em;
+  max-height: 31px;
+}
+
+.datos img {
+  max-height: 50px;
+}
+
+.datos {
+  padding-top: 2px;
+  text-align: center;
+}
+
+.datos .direccion,
+.cliente {
+  display: block;
+}
+
+.comandos {
+  margin-bottom: 1vh;
+  display: flex;
+  justify-content: space-around;
+}
+
+/* ============ ESPERA ============= */
+.espera .titulo {
+  color: #00abbf;
+}
+
+.espera .tarjetas {
+  background-color: #dffcff;
+}
+
+.espera .tarjetas::-webkit-scrollbar-thumb {
+  background-color: #00abbf;
+  border-radius: 5px;
+}
+
+.espera .cabecera {
+  background-color: #00abbf;
+}
+
+.espera .tarjeta .items {
+  width: 100%;
+  display: none;
+  padding-left: 5px;
+  padding-right: 5px;
+  animation-duration: 0.4s;
+}
+
+.espera .tarjeta:hover .items {
+  display: block;
+}
+
+/* ============ RETIRO ============= */
+
+.retiro .titulo {
+  color: #00bf78;
+}
+
+.retiro .tarjetas {
+  background-color: #e1fff4;
+}
+
+.retiro .cabecera {
+  background-color: #00bf78;
+}
+
+.retiro .tarjetas::-webkit-scrollbar-thumb {
+  background-color: #00bf78;
+  border-radius: 5px;
+}
+
+.retiro .aguardando {
+  background-color: #c2bd28;
+}
+
+.retiro .datos mat-icon {
+  font-size: 3em;
+}
+
+/* ============ RECHAZADO ============= */
+.rechazado .titulo {
+  color: #bf0020;
+}
+
+.rechazado .tarjetas {
+  background-color: #ffd4db;
+}
+
+.rechazado .tarjeta {
+  border-radius: 15px 15px 0px 0px;
+}
+.rechazado .cabecera {
+  background-color: #bf0020;
+}
+
+.rechazado .tarjetas::-webkit-scrollbar-thumb {
+  background-color: #bf0020;
+  border-radius: 5px;
+}
+.rechazado .comandos {
+  display: block;
+  width: 100%;
+}
+
+.rechazado .comandos .botones {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 5px;
+}
+
+.rechazado .comandos .botones button {
+  min-width: 40%;
+}
+
+.rechazado table {
+  width: 100%;
+}
+
+.rechazado table thead {
+  font-weight: bold;
+  color: white;
+  border-radius: 15px;
+  background-color: #bf0020;
+}
+
+.rechazado table tr {
+  line-height: 1.5em;
+}
+
+.rechazado table tbody tr:nth-child(odd) {
+  background-color: rgb(180, 180, 180);
+}
+.rechazado table tbody tr:nth-child(even) {
+  background-color: rgb(236, 236, 236);
+}
+
+.rechazado .selected {
+  background-color: rgb(71, 129, 255) !important;
+  transform: translate3d(-2px, -2px, 0);
+  color: white;
+  -webkit-box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+/* ============ COCINA ============= */
+
+.cocina .titulo {
+  color: #bf00ac;
+}
+.cocina .tarjetas {
+  background-color: #FCDDF9 ;
+}
+
+.cocina .cabecera {
+  background-color: #bf00ac;
+}
+
+.cocina .tarjetas::-webkit-scrollbar-thumb {
+  background-color: #bf00ac;
+  border-radius: 5px;
+}
+
+.cocina .indicadores {
+  padding-top: 5px;
+}
+
+.cocina .indicadores mat-icon {
+  font-size: 1.2em;
+  line-height: 0em;
+}
+
+.cocina table tbody tr:last-child {
+  background-color: black;
+  color: white;
+  font-weight: bolder;
+}
+
+.cocina #cancelado {
+  background-color: rgb(255, 198, 198);
+  color: red;
+  font-weight: bolder;
+}
+
+.cocina table {
+  margin-bottom: 5px;
+}
+
+.cocina .datos {
+  padding-top: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+/* ================== REPARTO =================== */
+
+.reparto .titulo {
+  color: #bf0020;
+}
+.reparto .tarjetas {
+  background-color: #ffd4db ;
+}
+
+.reparto .cabecera {
+  background-color: #bf0020;
+}
+
+.reparto .tarjetas::-webkit-scrollbar-thumb {
+  background-color: #bf0020;
+  border-radius: 5px;
+}
+
+.reparto .indicadores {
+  padding-top: 5px;
+}
+
+.reparto .indicadores mat-icon {
+  font-size: 1.2em;
+  line-height: 0em;
+}
+
+.reparto table tbody tr:last-child {
+  background-color: black;
+  color: white;
+  font-weight: bolder;
+}
+
+.reparto #cancelado {
+  background-color: rgb(255, 198, 198);
+  color: red;
+  font-weight: bolder;
+}
+
+.reparto table {
+  margin-bottom: 5px;
+}
+
+.reparto .datos {
+  padding-top: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+}

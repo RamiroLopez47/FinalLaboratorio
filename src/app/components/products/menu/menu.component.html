@@ -1,0 +1,140 @@
+<!-- <div class="container"> -->
+<!-- <mat-sidenav-container>
+    <mat-sidenav [(opened)]="sidenavOpened">
+        
+    </mat-sidenav> -->
+
+<!-- <mat-sidenav-content> -->
+<div class="cabecera">
+    <!-- ==================================== -->
+    <!-- boton retroceder  -->
+    <!-- ==================================== -->
+    <button *ngIf="this.page > 0" mat-raised-button class="my-editar" style="margin-right: 3vw;"
+        (click)="anteriorPagina()">
+        <mat-icon>navigate_before</mat-icon>
+    </button>
+    <button *ngIf="!(this.page > 0)" mat-raised-button class="my-disabledButton" style="margin-right: 3vw;"
+        disabled=true>
+        <mat-icon>navigate_before</mat-icon>
+    </button>
+
+    <span class="bienvenida">Busca lo que mas te guste</span>
+
+    <!-- ===================================== -->
+    <!-- boton siguiente  -->
+    <!-- ===================================== -->
+    <button *ngIf="this.platos.length > 0 && this.platos.length == this.size" mat-raised-button class="my-editar"
+        style="margin-left: 3vw;" (click)="siguientePagina()">
+        <mat-icon>navigate_next</mat-icon>
+    </button>
+    <button *ngIf="!(this.platos.length > 0) || this.platos.length < this.size" mat-raised-button
+        class="my-disabledButton" style="margin-left: 3vw;" disabled="true">
+        <mat-icon>navigate_next</mat-icon>
+    </button>
+
+
+
+    <!-- boton de filtros -->
+    <button mat-button (click)="sidenavOpened = !sidenavOpened" id="tune">
+        Filtrar <mat-icon>tune</mat-icon>
+    </button>
+
+</div>
+<div class="navegador" *ngIf="sidenavOpened">
+    <mat-form-field appearance="standard">
+        <mat-label>CATEGORÍA</mat-label>
+        <mat-select [(value)]="selected" disableOptionCentering (selectionChange)="cambioSeleccion($event)">
+            <mat-option [value]="0">Todo</mat-option>
+            <mat-option *ngFor="let categoria of categorias" [value]="categoria.id">
+                {{categoria.denominacion}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="standard">
+        <mat-label>Buscar</mat-label>
+        <input matInput placeholder="Ej. Pizza" (keyup.enter)="cargarPlatosPor(termino.value)" #termino>
+        <mat-icon matSuffix (click)="cargarPlatosPor(termino.value)" class="pointer">search</mat-icon>
+    </mat-form-field>
+</div>
+<!-- ============================================================ -->
+<!-- ACA VA TODO EL CONTENIDO  -->
+<!-- ============================================================ -->
+<!-- tarjetas  -->
+<div class="mensajeDeNulo" *ngIf="platos.length < 1">
+    <span>No hay elementos para mostrar</span>
+</div>
+<div class="card-group">
+
+    <div class="tarjeta animated zoomIn" *ngFor="let plato of platos">
+        <div class="card" [class.mat-elevation-z8]="true">
+            <div class="rubro">
+                {{plato.denominacion}}
+            </div>
+            <div class="cont-nombre">
+                <div class="ingredientes animated flipInY">
+                    <ul>
+                        <li *ngFor="let detalle of plato.detallePlato">{{detalle.articulo.denominacion}}</li>
+                    </ul>
+                </div>
+                <span class="titulo">{{plato.categoriaPlato.denominacion}}</span>
+                <img [src]="plato.imagen" class="card-img-top" alt="Cargando imagen..."
+                    onError="this.src='assets/img/noImage.jpg'">
+            </div>
+            <div class="card-body">
+                <span class="precio">${{plato.precioVenta | number : '1.2-2'}}</span>
+                <ng-container *ngIf="user$ | async; else noLogueado">
+
+                    <ng-container *ngIf="estaDisponible(plato); else noEstaDisponible">
+                        <button mat-raised-button (click)="agregarAlCarrito(plato)">
+                            Añadir <i class="fas fa-cart-plus"></i>
+                        </button>
+                    </ng-container>
+                    <ng-template #noEstaDisponible >
+                        <span style="color:red">No hay insumos</span>
+                    </ng-template>
+
+                </ng-container>
+                <ng-template #noLogueado>
+                    <button mat-button [routerLink]="[ '/user/login']" matTooltip="Ingresa Para Hacer Tus Pedidos"
+                        matTooltipClass="my-tooltip-red">Ingresa</button>
+                </ng-template>
+
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<div class="cabecera">
+    <!-- ==================================== -->
+    <!-- boton retroceder  -->
+    <!-- ==================================== -->
+    <button *ngIf="this.page > 0" mat-raised-button class="my-editar" style="margin-right: 3vw;"
+        (click)="anteriorPagina()">
+        <mat-icon>navigate_before</mat-icon> Anterior
+    </button>
+    <button *ngIf="!(this.page > 0)" mat-raised-button class="my-disabledButton" style="margin-right: 3vw;"
+        disabled=true>
+        <mat-icon>navigate_before</mat-icon> Anterior
+    </button>
+    <span class="bienvenida">{{this.page+1}}</span>
+    <!-- ===================================== -->
+    <!-- boton siguiente  -->
+    <!-- ===================================== -->
+    <button *ngIf="this.platos.length > 0 && this.platos.length == this.size" mat-raised-button class="my-editar"
+        style="margin-left: 3vw;" (click)="siguientePagina()">
+        Siguiente <mat-icon>navigate_next</mat-icon>
+    </button>
+    <button *ngIf="!(this.platos.length > 0) || this.platos.length < this.size" mat-raised-button
+        class="my-disabledButton" style="margin-left: 3vw;" disabled="true">
+        Siguiente <mat-icon>navigate_next</mat-icon>
+    </button>
+
+
+</div>
+<br>
+<!-- </mat-sidenav-content>
+</mat-sidenav-container> -->
+
+
+
+<!-- </div> -->

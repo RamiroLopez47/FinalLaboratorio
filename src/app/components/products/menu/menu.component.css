@@ -1,0 +1,170 @@
+.container {
+  text-align: center;
+}
+#tune {
+  float: right;
+  box-sizing: border-box;
+  position: absolute;
+  right: 5vw;
+  background-color: rgb(207, 207, 207);
+}
+
+mat-sidenav-content {
+  min-height: 70vh;
+  background-color: white;
+}
+.cabecera {
+  text-align: center;
+  margin-top: 3vh;
+}
+.bienvenida {
+  margin: 2% auto;
+  font-size: 3em;
+  text-align: center;
+  text-transform: uppercase;
+  color: rgb(58, 58, 58);
+  font-family: "Bebas Neue", cursive;
+}
+.navegador {
+  display: flex;
+  width: 30%;
+  margin: 0 auto;
+  justify-content: space-between;
+  animation-name: recorrido;
+  animation-duration: .6s;
+}
+
+@keyframes recorrido {
+  from {
+    opacity: 0;
+    transform: translate(0, -25px);
+  }
+
+  to {
+    transform: translate(0, 0);
+  }
+}
+
+.navegador mat-form-field {
+  width: 45% !important;
+}
+
+.navegador mat-form-field {
+  width: 100%;
+}
+
+@media only screen and (max-width: 600px) {
+  .navegador {
+    display: block;
+  }
+
+  .tarjeta {
+    justify-content: center;
+    display: flex;
+  }
+
+  .bienvenida {
+    font-size: 2em;
+  }
+}
+
+.card-group {
+  justify-content: center;
+}
+
+.card {
+  border-radius: 5px;
+  width: 250px;
+  margin-right: 15px;
+  margin-top: 15px;
+  border: none;
+  border-radius: 15px;
+}
+
+.card img {
+  max-width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+.cont-nombre {
+  position: relative;
+}
+.titulo {
+  line-height: 2rem;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  font-size: 120%;
+  padding-left: 10px;
+  text-transform: capitalize;
+}
+
+.rubro {
+  padding: 5px;
+  font-family: 'Sriracha', cursive;
+  background-color: rgb(223, 0, 0);
+  color: white;
+  min-height: 5vh;;
+  font-size: 130%;
+  text-align: center;
+  text-transform: capitalize;
+  border-radius: 15px 15px 0px 0px;
+}
+
+.card-body {
+  display: flex;
+  justify-content: space-around;
+}
+
+.card-body span.precio{
+  font-size: 130%;
+  font-weight: bolder;
+  padding-top: 5px;
+  color: red;
+}
+
+.card-body button {
+  width: 50%;
+  background-color: #ffdd00;
+}
+
+.ingredientes {
+  visibility: hidden;
+  display: none;
+  max-height: 200px !important;
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 10;
+  width: 100%;
+  position: absolute;
+  text-align: center;
+}
+
+.ingredientes ul {
+  padding: 0px;
+  list-style-type: none;
+  overflow-y: scroll;
+  height: 152px;
+  box-sizing: border-box;
+}
+
+.card:hover .ingredientes {
+  display: block;
+  visibility: visible;
+}
+
+/* ========================= */
+.mensajeDeNulo {
+  color: rgba(0, 0, 0, 0.534);
+  border-radius: 15px;
+  margin: 2%;
+  background-color: rgb(255, 196, 196);
+  font-size: 2em;
+  font-weight: bold;
+  min-height: 20vh;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

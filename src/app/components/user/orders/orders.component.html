@@ -1,0 +1,53 @@
+<div class="contenedor">
+  <br>
+  <div class="tabla" class="mat-elevation-z8">
+    <mat-table [dataSource]="dataSource" matSort>
+
+      <!-- Fecha Column -->
+      <ng-container matColumnDef="fecha">
+        <mat-header-cell mat-sort-header *matHeaderCellDef> Fecha </mat-header-cell>
+        <mat-cell *matCellDef="let element" [ngClass]="{'finalizado': element.estado.denominacion == 'COBRADO'}">
+          {{element.fecha | date:'d/M/yy, h:mm a' }} </mat-cell>
+      </ng-container>
+
+      <!-- Estado Column -->
+      <ng-container matColumnDef="estado">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Estado </mat-header-cell>
+        <mat-cell *matCellDef="let element" [ngClass]="{'finalizado': element.estado.denominacion == 'COBRADO'}">
+          {{element.estado.denominacion | uppercase}} </mat-cell>
+      </ng-container>
+
+      <!-- Tipo de Entrega Column -->
+      <ng-container matColumnDef="conDelivery">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Tipo de Entrega </mat-header-cell>
+        <mat-cell *matCellDef="let element" [ngClass]="{'finalizado': element.estado.denominacion == 'COBRADO'}">
+          <span *ngIf="element.conDelivery ">Con Envio</span>
+          <span *ngIf="!element.conDelivery ">Retiro en Local</span>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Total Column -->
+      <ng-container matColumnDef="total">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Total </mat-header-cell>
+        <mat-cell *matCellDef="let element" [ngClass]="{'finalizado': element.estado.denominacion == 'COBRADO'}"> $
+          {{element.precioFinal | number : '1.2-2'}} </mat-cell>
+      </ng-container>
+
+      <!-- Acciones Column -->
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let element" [ngClass]="{'finalizado': element.estado.denominacion == 'COBRADO'}"
+          style="display: flex; justify-content: center;">
+          <button mat-icon-button class="botonVer mat-elevation-z4" (click)="verDetalles(element)">
+            <mat-icon [inline]="true">search</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns.concat('actions')"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns.concat('actions');"></mat-row>
+
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5,10,20]" showFirstLastButtons aria-label="etiqueta"> </mat-paginator>
+  </div>
+</div>

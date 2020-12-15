@@ -1,0 +1,61 @@
+<br>
+<div class="contenedor">
+
+    <div class="preTabla">        
+        <div></div>
+        <div class="buscador">
+            <input placeholder="Filtrar elementos" (keyup)="filtrar($event.target.value)" #termino>
+            <button class="my-editar" (click)="filtrar(termino.value)">
+                <i class="fas fa-search">
+                </i>
+            </button>
+        </div>
+    </div>
+
+    <div class="tabla" class="mat-elevation-z8">
+        <mat-table [dataSource]="dataSource" matSort>
+
+            <!-- Columna NOMBRE -->
+            <ng-container matColumnDef="nombre">
+                <mat-header-cell mat-sort-header *matHeaderCellDef> Nombre Completo </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    {{element.nombre | titlecase}} {{element.apellido | titlecase}}</mat-cell>
+            </ng-container>
+
+            <!-- columna Email -->
+            <ng-container matColumnDef="email">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    {{element.email | titlecase}} </mat-cell>
+            </ng-container>
+
+            <!-- Columna ROl -->
+            <ng-container matColumnDef="rol">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Rol </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    {{element.rol.denominacion | titlecase}} </mat-cell>
+            </ng-container>
+
+
+            <!-- Tipo de Entrega subCategoria -->
+            <ng-container matColumnDef="telefono">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Teléfono </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    {{element.telefono}} </mat-cell>
+            </ng-container>
+
+            <!-- Tipo de Entrega subCategoria -->
+            <ng-container matColumnDef="domicilio">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Domicilio</mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    {{element.domicilios[0]?.localidad.departamento.denominacion}}  -  {{element.domicilios[0]?.localidad.denominacion}}
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+
+        </mat-table>
+        <mat-paginator [pageSizeOptions]="[5,10,20]" showFirstLastButtons aria-label="etiqueta"> </mat-paginator>
+    </div>
+</div>

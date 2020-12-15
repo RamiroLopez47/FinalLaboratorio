@@ -1,0 +1,31 @@
+<div class="contenedor">
+
+    <div id="formulario">
+        <div id="encabezado">
+            <span>{{titulo}}</span>
+        </div>
+        <form [formGroup]="forma" novalidate="novalidate">
+
+            <!-- CAMPO DENOMINACION -->
+            <mat-form-field appearance="standard">
+                <mat-icon matPrefix>
+                    text_fields</mat-icon>
+                <mat-label>Denominación</mat-label>
+                <input matInput formControlName="denominacion">
+                <mat-error>
+                    Ingrese una denominacion
+                </mat-error>
+            </mat-form-field>
+
+            <div class="comandos">
+                <button mat-raised-button class="my-eliminar" (click)="onNoClick()">CANCELAR</button>
+                <button *ngIf="this.forma.invalid" mat-raised-button class="my-disabledButton"
+                    disabled="true">AÑADIR</button>
+                <button *ngIf="this.forma.valid" mat-raised-button class="my-agregar"
+                    (click)="guardarCambios()">AÑADIR</button>
+            </div>
+        </form>
+
+        <br>
+    </div>
+</div>

@@ -1,0 +1,163 @@
+<div class="contenedor animated fadeInRight">
+    <div class="titulo">
+        <div (click)="goBack()" class="pointer">
+            <mat-icon>arrow_back</mat-icon> VOLVER
+        </div>
+        <h2>Mi Carrito </h2>
+        <div></div>
+    </div>
+    <div *ngIf="carrito.detallesPedido.length > 0">
+        <div class="items">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <td></td>
+                        <td>PRODUCTO</td>
+                        <td>CANTIDAD</td>
+                        <td>PRECIO UNT.</td>
+                        <td>SUBTOTAL</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let producto of carrito.detallesPedido; let i = index">
+                        <td>
+                            <button (click)="eliminarItem(i)" class="eliminarItem">
+                                <mat-icon>close</mat-icon>
+                            </button>
+                        </td>
+                        <td>
+                            {{producto.plato.denominacion}}
+                        </td>
+
+
+                        <!-- ========================================== -->
+                        <!-- Comandos de cantidades  -->
+                        <!-- ========================================== -->
+
+
+                        <td class="cantidades">
+                            <button (click)="decrementar(i)" class="decrementar">
+                                <mat-icon>remove</mat-icon>
+                            </button>
+                            {{producto.cantidad}}
+                            <button (click)="incrementar(i)" class="incrementar">
+                                <mat-icon>add</mat-icon>
+                            </button>
+                        </td>
+
+                        <td>
+                            $ {{producto.plato.precioVenta | number : '1.2-2'}}
+                        </td>
+                        <td>
+                            $ {{producto.subTotal | number : '1.2-2'}}
+                        </td>
+                    </tr>
+                    <tr class="total">
+                        <td colspan="4">TOTAL DE LA COMPRA</td>
+                        <td colspan="1">$ {{carrito.total | number : '1.2-2'}}</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+        <div class="inferior">
+            <div class="formaDeEntrega">
+                <div class="opciones">
+                    <h3>Dinos como te gustaría recibir tu pedido:</h3>
+                    <mat-radio-group aria-label="Select an option" [(ngModel)]="carrito.conDelivery"
+                        (change)="cambioTipoEntrega($event)">
+                        <mat-radio-button [value]="false">Retiro en Local</mat-radio-button>
+                        <mat-radio-button [value]="true" style="margin-left: 2vw;">Entregar a Domicilio
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </div>
+
+                <ng-container *ngIf="carrito.conDelivery; else enLocal" class="direcciones">
+
+                    <ng-container *ngIf="currentUser.domicilios.length > 0; else noTieneCargadaDirecciones">
+                        <mat-form-field>
+                            <mat-label>Selecciona una dirección</mat-label>
+                            <mat-select [(ngModel)]="direccionSeleccionada">
+                                <ng-container  *ngFor="let domicilio of currentUser.domicilios" >
+                                    <mat-option [value]="domicilio" *ngIf="domicilio.status">
+                                        {{domicilio.calle}} {{domicilio.manzana}} - {{domicilio.numero}} /
+                                        {{domicilio.barrio}}
+                                        /
+                                        ({{domicilio.localidad.denominacion}} -
+                                        {{domicilio.localidad.departamento.denominacion}})
+                                    </mat-option>
+                                </ng-container>
+                            </mat-select>
+                        </mat-form-field>
+                    </ng-container>
+                    <ng-template #noTieneCargadaDirecciones>
+                        <p style="color: red;">No tienes ningun domicilio cargado</p>
+                        <a [routerLink]="[ '/user/profile']">Agrega uno ahora, desde tu perfil</a>
+
+                    </ng-template>
+
+
+                </ng-container>
+                <ng-template #enLocal>
+                    <span class="conDescuento">-10% De Descuento por Retiro en Local. </span>
+                </ng-template>
+            </div>
+            <div>
+                <ng-container>
+                    <span class="precioFinal">PRECIO FINAL: $ {{carrito.precioFinal | number : '1.2-2'}}</span>
+                </ng-container>
+                <p>Tu pedido estará el
+                    <b>{{carrito.horaEstimadaFin  | date: 'EEEE' }} a las
+                        {{carrito.horaEstimadaFin  | date: 'HH:mm' }}hs
+                    </b>
+                    <br>
+                    aproximadamente*
+                </p>
+                <!-- <p><i>*(horario sujeto a modificaciones)</i></p> -->
+
+            </div>
+            <div class="comandos">
+                <ng-container *ngIf="validarHorario(); else fueraDeHoraHabil">
+
+                    <!-- SI EL HORARIO ES VALIDO  -->
+                    <ng-container *ngIf="validarBoton(); else pedidoInvalido">
+                        <button mat-raised-button class="my-agregar" (click)="finalizarPedido()">
+                            FINALIZAR PEDIDO
+                        </button>
+                    </ng-container>
+                    <ng-template #pedidoInvalido>
+                        <button mat-raised-button class="my-disabledButton" disabled="true">
+                            FINALIZAR PEDIDO
+                        </button>
+                    </ng-template>
+
+                </ng-container>
+
+                <!-- SI EL HORARIO ES INVALIDO  -->
+
+                <ng-template #fueraDeHoraHabil>
+                    <div class="horarios">
+                        <p>Podrás enviar este pedido de</p>
+                        <p><b>Lunes a Domingos de 20:00 a 00:00</b>,
+                        <p> y <b>Sábados y Domingos de 11:00 a 15:00</b>.</p>
+                    </div>
+                </ng-template>
+
+
+            </div>
+        </div>
+    </div>
+    <div *ngIf="carrito.detallesPedido.length == 0" class="animated fadeInDown">
+        <div class="cartel">
+            <div class="cont-imagen">
+                <img src="http://yocordoba.com/Cine-y-series/wp-content/uploads/2019/02/404-gif.gif" alt="cargando...">
+            </div>
+            <div class="text">
+                <P>TU CARRITO ESTA VACÍO</P>
+                <button mat-raised-button class="my-editar" [routerLink]="[ '/menu']">VER CATÁLOGO <mat-icon>
+                        shopping_cart</mat-icon> </button>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,69 @@
+<div class="contenedor">
+  <!-- SELECTOR DE MODOS -->
+  <mat-form-field appereance="standart">
+    <mat-label>Secciones</mat-label>
+    <mat-select [(value)]="valueSelected" disableOptionCentering>
+      
+      <div *ngIf="currentRol == 'gerente'|| currentRol == 'cocinero' "><mat-option  [value]="0" >Platos</mat-option></div>
+      <div *ngIf="currentRol == 'gerente'|| currentRol == 'cocinero' "><mat-option  [value]="1">Articulos</mat-option></div>
+      <div *ngIf="currentRol == 'gerente' "><mat-option  [value]="2">Usuarios</mat-option></div>
+      <div *ngIf="currentRol == 'gerente' "><mat-option  [value]="3">Estadisticas</mat-option></div>
+      <div *ngIf="currentRol == 'gerente'|| currentRol == 'cajero'"><mat-option  [value]="4">Facturación</mat-option></div>
+
+    </mat-select>
+  </mat-form-field>
+
+  <!-- SECCION DE PLATOS -->
+  <mat-tab-group mat-stretch-tabs *ngIf="valueSelected == 0">
+    <mat-tab label="Plato">
+      <app-plato-screen></app-plato-screen>
+    </mat-tab>
+    <mat-tab label="Categoria Plato">
+      <app-categoria-plato-screen></app-categoria-plato-screen>
+    </mat-tab>    
+  </mat-tab-group>
+
+  <!-- SECCION DE ARTICULOS -->
+  <mat-tab-group mat-stretch-tabs *ngIf="valueSelected == 1">
+    <mat-tab label="Articulo">
+      <app-articulo-screen></app-articulo-screen>
+    </mat-tab>
+    <mat-tab label="Categoria Articulo">
+      <app-categoria-articulo-screen></app-categoria-articulo-screen>
+    </mat-tab>
+    <mat-tab label="Unidad De Medida">
+      <app-medida-articulo-screen></app-medida-articulo-screen>
+    </mat-tab>
+  </mat-tab-group>
+
+  <!-- SECCION DE USUARIOS -->
+  <mat-tab-group mat-stretch-tabs *ngIf="valueSelected == 2">
+    <mat-tab label="Registro de Usuarios">
+      <app-user-management></app-user-management>
+    </mat-tab>    
+  </mat-tab-group>
+
+  <!-- SECCION DE ARTICULOS -->
+  <mat-tab-group mat-stretch-tabs *ngIf="valueSelected == 3">
+    <mat-tab label="Ingresos">
+      <app-estadistica-ingresos-screen></app-estadistica-ingresos-screen>
+    </mat-tab>
+    <mat-tab label="Top Platos">
+      <app-estadistica-platos-screen></app-estadistica-platos-screen>
+    </mat-tab>
+    <mat-tab label="Top Clientes">
+      <app-estadistica-clientes-screen></app-estadistica-clientes-screen>
+    </mat-tab>
+    <mat-tab label="Stock Bajo">
+      <app-stock-bajo></app-stock-bajo>
+    </mat-tab>
+  </mat-tab-group>
+
+  <!-- SECCION DE ARTICULOS -->
+  <mat-tab-group mat-stretch-tabs *ngIf="valueSelected == 4">
+    <mat-tab label="Facturas Emitidas">
+      <app-facturacion></app-facturacion>
+    </mat-tab>
+  </mat-tab-group>
+
+</div>

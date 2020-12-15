@@ -1,0 +1,128 @@
+.titulo {
+  margin-top: 2vh;
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 5%;
+}
+
+.mat-icon {
+  vertical-align: middle;
+}
+
+h2 {
+  font-size: 2em;
+  text-transform: uppercase;
+}
+.items {
+  width: 90%;
+  margin: auto;
+}
+
+.items table {
+  width: 100%;
+}
+
+tr {
+  text-align: center;
+}
+
+.cantidades {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cantidades button,
+.eliminarItem {
+  border-radius: 25%;
+  border: none;
+  background-color: transparent;
+}
+
+.cantidades button.decrementar {
+  margin-right: 1vw;
+}
+
+.cantidades button.incrementar {
+  margin-left: 1vw;
+}
+
+.total {
+  background-color: rgb(49, 49, 49) !important;
+  color: white;
+  font-weight: bold;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.conDescuento {
+  font-size: 1.2em;
+}
+
+.inferior {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.precioFinal {
+  color: red;
+  font-size: 2em;
+}
+
+@media only screen and (max-width: 768px) {
+  .inferior {
+    display: block;
+    text-align: center;
+  }
+
+  .inferior > div {
+    margin-top: 3vh;
+  }
+
+  .items {
+    width: 100%;
+  }
+
+  .items table {
+    width: 100vw !important;
+  }
+
+  .items table tr td {
+    padding-left: 2px;
+    padding-right: 2px;
+  }
+
+  .cartel {
+    display: block;
+    align-items: none;
+  }
+
+  .cartel img {
+    width: 100%;
+  }
+}
+
+.cartel {
+  display: flex;
+  align-items: center;
+}
+
+.cartel .text {
+  font-size: 2em;
+  color: red;
+  text-align: center;
+}
+
+.horarios p {
+  line-height: 0.5em;
+  text-align: center;
+  color: white;
+}
+
+.horarios {
+  background-color: rgb(223, 0, 0);
+  padding: 1em;
+}

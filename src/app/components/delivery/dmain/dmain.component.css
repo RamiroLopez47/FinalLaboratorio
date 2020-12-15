@@ -1,0 +1,163 @@
+.navegador {
+  text-align: center;
+}
+
+mat-slide-toggle {
+  margin-top: 1vh;
+}
+
+::ng-deep
+  .mat-slide-toggle.mat-checked:not(.mat-disabled)
+  .mat-slide-toggle-thumb {
+  background-color: blue; /*replace with your color*/
+}
+
+::ng-deep
+  .mat-slide-toggle.mat-checked:not(.mat-disabled)
+  .mat-slide-toggle-bar {
+  background-color: rgb(116, 116, 255); /*replace with your color*/
+}
+
+/* ====================================== */
+/* CONFIGURACIONES GLOBALES  */
+/* ====================================== */
+
+.tarjetas > p {
+  text-align: left;
+  font-style: italic;
+  margin-top: 1vh;
+}
+
+.tarjeta {
+  margin: 0.5em;
+  margin-top: 1em;
+  border-radius: 15px;
+  min-height: 20vh;
+}
+
+.cabecera {
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+  padding-left: 3vw;
+  padding-right: 3vw;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.5em;
+  color: white;
+  border-radius: 15px 15px 0px 0px;
+}
+
+/* ===================================== */
+/* ENVIO OBLIGATORIO */
+/* ===================================== */
+
+.envioObligatorio .tarjeta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2em;
+  font-weight: bold;
+  z-index: 10;
+}
+
+.envioObligatorio .disable {
+  color: rgb(199, 199, 199);
+}
+
+.envioObligatorio .enable {
+  color: gray;
+}
+
+.tomarOtro {
+  display: flex;
+  align-items: center;
+  border: 5px dashed rgb(255, 68, 68);
+  color: rgb(255, 68, 68);
+  justify-content: center;
+  margin: 1em;
+  z-index: 5;
+}
+
+.tomarOtro > p {
+  font-size: 2em;
+  font-weight: bold;
+}
+/* ========================================== */
+/* ======= PEDIDOS EN ESPERA =========== */
+/* ========================================== */
+
+.enEspera .tarjeta {
+  min-height: 100px;
+}
+
+.enEspera .cabecera {
+  background-color: #00abbf;
+}
+
+.contenido {
+  overflow: hidden;
+  padding: 7px;
+}
+
+.direccion {
+  float: left;
+  width: 70%;
+}
+
+.mapa {
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  min-height: 30px;
+  max-height: 40px;
+  width: 30%;
+  float: left;
+}
+
+.mapa img {
+  width: 80%;
+  max-width: 50px;
+  max-height: 50px;
+  object-fit: cover;
+}
+
+.direccion > p {
+  margin-top: 10px;
+  line-height: 0.2em;
+}
+.items {
+  margin-top: 3vh;
+  float: left;
+  width: 100%;
+}
+
+.items table tr {
+  line-height: 0.5em;
+}
+
+.comandos {
+  overflow: hidden;
+  width: 100%;
+}
+
+.enEspera button {
+  background-color: #00abbf;
+  color: white;
+}
+
+/* ================================== */
+/* EN CAMINO  */
+/* ================================== */
+
+.enCamino .cabecera {
+  background-color: yellow;
+  color: black;
+}
+
+.entregado .cabecera{
+  background-color: green;
+}
+
+

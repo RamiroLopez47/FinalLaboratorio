@@ -1,0 +1,193 @@
+<div class="container">
+    <div class="encabezado">
+        <div class="titulo">GESTIÓN DE COBRO</div>
+        <div class="numeroPedido">#{{pedido.id}}</div>
+    </div>
+
+    <!-- ================================ -->
+    <!-- NAVEGADOR -->
+    <!-- ================================ -->
+
+    <div class="navegador">
+        <div class="opcionesDePago">
+            <mat-button-toggle-group name="medioDePago" #seleccion="matButtonToggleGroup">
+                <mat-button-toggle value="credito" *ngIf="!pedido.conDelivery">Crédito</mat-button-toggle>
+                <mat-button-toggle value="debito" *ngIf="!pedido.conDelivery">Débito</mat-button-toggle>
+                <mat-button-toggle value="efectivo">Efectivo</mat-button-toggle>
+            </mat-button-toggle-group>
+        </div>
+        <div class="monto">${{pedido.precioFinal | number:'1.2-2'}}</div>
+    </div>
+
+    <!-- ========================================= -->
+    <!-- COBRO POR CRÉDITO -->
+    <!-- ========================================= -->
+
+    <div id="credito" *ngIf="seleccion.value == 'credito'">
+
+        <form [formGroup]="formaCredito">
+            <div class="datos">
+                <!-- CAMPO NUMERO DE TARJETA -->
+                <mat-form-field appearance="standard">
+                    <mat-icon matPrefix>
+                        payment
+                    </mat-icon>
+                    <mat-label>Número De Tarjeta</mat-label>
+                    <input type="number" matInput formControlName="numeroDeTarjeta">
+                    <mat-error>
+                        Ingrese un número de tarjeta válido.
+                    </mat-error>
+                </mat-form-field>
+
+                <!-- CAMPO CVV CVC -->
+                <mat-form-field appearance="standard">
+                    <mat-icon matPrefix>
+                        payment
+                    </mat-icon>
+                    <mat-label>CVV / CVC</mat-label>
+                    <input matInput formControlName="cvv" type="number">
+                    <mat-error>
+                        Ingrese un CVV válido.
+                    </mat-error>
+                </mat-form-field>
+
+                <!-- CAMPO NUMERO DE DOCUMENTO-->
+                <mat-form-field appearance="standard">
+                    <mat-icon matPrefix>
+                        face
+                    </mat-icon>
+                    <mat-label>Número Documento</mat-label>
+                    <input matInput formControlName="dni" type="number">
+                    <mat-error>
+                        Ingrese un DNI válido.
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <br>
+            <div class="cuotas">
+                <mat-radio-group formControlName="cuotas">
+                    <mat-radio-button value="1">1 Cuota</mat-radio-button>
+                    <mat-radio-button value="3">3 Cuotas</mat-radio-button>
+                    <mat-radio-button value="6">6 Cuotas</mat-radio-button>
+                    <mat-radio-button value="12">12 Cuotas</mat-radio-button>
+                    <mat-radio-button value="18">18 Cuotas</mat-radio-button>
+                    <mat-radio-button value="24">24 Cuotas</mat-radio-button>
+                </mat-radio-group>
+            </div>
+            <br>
+            <div class="pie">
+                <div class="montoCuota">Monto De Cuota:
+                    ${{pedido.precioFinal / formaCredito.value.cuotas | number : '1.2-2'}}
+                </div>
+                <div class="comandos">
+                    <button mat-raised-button class="my-eliminar" (click)="cancelar()">
+                        Cancelar
+                    </button>
+
+                    <button *ngIf="formaCredito.valid" mat-raised-button class="my-agregar" (click)="aceptarCredito()">
+                        Aceptar
+                    </button>
+                    <button *ngIf="formaCredito.invalid" mat-raised-button class="my-disabledButton" disabled="true">
+                        Aceptar
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- ========================================= -->
+    <!-- COBRO POR DÉBITO -->
+    <!-- ========================================= -->
+
+    <div id="debito" *ngIf="seleccion.value == 'debito'">
+        <form [formGroup]="formaDebito">
+            <div class="datos">
+                <!-- CAMPO NUMERO DE TARJETA -->
+                <mat-form-field appearance="standard">
+                    <mat-icon matPrefix>
+                        payment
+                    </mat-icon>
+                    <mat-label>Número De Tarjeta</mat-label>
+                    <input matInput type="number" formControlName="numeroDeTarjeta" minlength="16" maxlength="16">
+                </mat-form-field>
+
+                <!-- CAMPO CVV CVC -->
+                <mat-form-field appearance="standard" style="max-width: 100px;">
+                    <mat-icon matPrefix>
+                        payment
+                    </mat-icon>
+                    <mat-label>CVV / CVC</mat-label>
+                    <input matInput type="number" formControlName="cvv">
+                </mat-form-field>
+
+                <!-- CAMPO NUMERO DE DOCUMENTO-->
+                <mat-form-field appearance="standard">
+                    <mat-icon matPrefix>
+                        face
+                    </mat-icon>
+                    <mat-label>Número Documento</mat-label>
+                    <input matInput type="number" formControlName="dni">
+                </mat-form-field>
+
+                <!-- CAMPO NUMERO DE DOCUMENTO-->
+                <mat-form-field appearance="standard" style="max-width: 100px;">
+                    <mat-icon matPrefix>
+                        lock
+                    </mat-icon>
+                    <mat-label>Pin</mat-label>
+                    <input matInput type="password" formControlName="pin">
+                </mat-form-field>
+            </div>
+            <div class="pie">
+                <div class="comandos">
+                    <button mat-raised-button class="my-eliminar" (click)="cancelar()">
+                        Cancelar
+                    </button>
+
+                    <button *ngIf="formaDebito.valid" mat-raised-button class="my-agregar" (click)="aceptarDebito()">
+                        Aceptar
+                    </button>
+                    <button *ngIf="formaDebito.invalid" mat-raised-button class="my-disabledButton" disabled="true">
+                        Aceptar
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- ========================================= -->
+    <!-- COBRO EN EFECTIVO -->
+    <!-- ========================================= -->
+
+    <div id="efectivo" *ngIf="seleccion.value == 'efectivo'">
+        <form [formGroup]="formaEfectivo">
+            <div class="datos">
+                <mat-form-field appearance="standard">
+                    <mat-icon matPrefix>
+                        local_atm
+                    </mat-icon>
+                    <mat-label>Su Pago</mat-label>
+                    <input matInput type="number" formControlName="suPago">
+                </mat-form-field>
+                <div class="vuelto">
+                    <span>Vuelto: ${{(pedido.precioFinal - formaEfectivo.value.suPago) * -1 | number:'1.2-2'}}</span>
+                </div>
+            </div>
+            <div class="pie">
+                <div class="comandos">
+                    <button mat-raised-button class="my-eliminar" (click)="cancelar()">
+                        Cancelar
+                    </button>
+
+                    <button *ngIf="formaEfectivo.valid && formaEfectivo.value.suPago >= pedido.precioFinal" mat-raised-button class="my-agregar" (click)="aceptarEfectivo()">
+                        Aceptar
+                    </button>
+                    <button *ngIf="formaEfectivo.invalid || formaEfectivo.value.suPago < pedido.precioFinal" mat-raised-button class="my-disabledButton" disabled="true">
+                        Aceptar
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>

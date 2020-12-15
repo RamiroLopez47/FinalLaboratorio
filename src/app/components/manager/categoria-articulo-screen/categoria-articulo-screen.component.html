@@ -1,0 +1,76 @@
+<div class="contenedor">
+
+    <div class="preTabla">
+        <div class="agregar">
+            <!-- <button mat-raised-button class="my-configurar" (click)="sidenavOpened = !sidenavOpened">
+            <mat-icon>settings</mat-icon>
+        </button> -->
+            <button mat-raised-button class="my-agregar ml-3" (click)="agregarNuevo()">Agregar</button>
+
+        </div>
+        <div class="buscador">
+            <input placeholder="Filtrar elementos" (keyup)="filtrar($event.target.value)" #termino>
+            <button class="my-editar" (click)="filtrar(termino.value)">
+                <i class="fas fa-search">
+
+                </i>
+            </button>
+        </div>
+    </div>
+
+
+
+    <div class="tabla" class="mat-elevation-z8">
+
+
+
+        <mat-table [dataSource]="dataSource" matSort>
+
+            <!-- denominacion Column -->
+            <ng-container matColumnDef="denominacion">
+                <mat-header-cell mat-sort-header *matHeaderCellDef> Denominación </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    {{element.denominacion | titlecase}} </mat-cell>
+            </ng-container>
+
+            <!-- descripcion Column -->
+            <ng-container matColumnDef="descripcion">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Descripcion </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    {{element.descripcion | titlecase}} </mat-cell>
+            </ng-container>
+
+            <!-- categoriaArticulo Column -->
+            <ng-container matColumnDef="categoriaArticulo">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Tiene SubCategorias</mat-header-cell>
+                <mat-cell *matCellDef="let element">
+
+                    <!-- VALIDACION DE EXISTENCIA DE PERTENENCIA A CATEGORIA PADRE -->
+                    <span *ngIf="(element.categoriaArticulo.length > 0)"> Si </span>
+                    <span *ngIf="!(element.categoriaArticulo.length > 0)">No</span>
+
+                </mat-cell>
+            </ng-container>
+
+            <!-- Acciones Column -->
+            <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                <mat-cell *matCellDef="let element" style="display: flex; justify-content: center;">
+                    <button mat-mini-fab class="my-editar" (click)="editar(element)">
+                        <mat-icon [inline]="true">create</mat-icon>
+                    </button>
+                    <button mat-mini-fab class="my-eliminar" (click)="eliminar(element)">
+                        <mat-icon [inline]="true">delete_forever</mat-icon>
+                    </button>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns.concat('actions')"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns.concat('actions');"></mat-row>
+
+        </mat-table>
+        <mat-paginator [pageSizeOptions]="[5,10,20]" showFirstLastButtons aria-label="etiqueta">
+        </mat-paginator>
+    </div>
+
+</div>

@@ -1,0 +1,44 @@
+.contenedor {
+    text-align: center;
+  }
+  
+  #formulario #encabezado {
+    padding-left: 2em;
+    text-align: left;
+    background-color: #df0000;
+    line-height: 3em;
+    color: white;
+    font-weight: bold;
+  }
+  
+  #formulario {
+    width: 100%;
+    box-sizing: border-box;
+    margin: auto;
+  }
+  
+  #formulario form {
+    overflow: hidden;
+  }
+  
+  #formulario mat-form-field , .campo{
+    box-sizing: border-box;
+    display: inline-block;
+    margin: 0.5%;
+    width: 32.33%;
+  }
+
+  #direccion mat-form-field {
+    width: 24%;
+  }
+  
+  mat-radio-button{
+      margin-left: 10%;
+  }
+  
+  .comandos{
+      width: 20%;
+      margin: auto;
+      display: flex;
+      justify-content: space-around;
+  }

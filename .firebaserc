@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "elbuensabor-3b348": {
+      "hosting": {
+        "finallabo": [
+          "elbuensabor-3b348"
+        ]
+      }
+    }
+  }
+}

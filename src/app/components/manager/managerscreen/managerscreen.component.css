@@ -1,0 +1,19 @@
+.contenedor {
+  margin-top: 3vh;
+}
+
+mat-form-field {
+  display: block;
+  font-size: 1.1em;
+  width: 250px;
+  margin: auto;
+}
+
+::ng-deep .mat-tab-list .mat-tab-labels .mat-tab-label-active {
+  color: rgb(255, 255, 255);
+  background-color: rgba(39, 39, 83, 0.836);
+}
+
+::ng-deep .mat-ink-bar {
+  background-color: rgb(2, 2, 2) !important;
+}
